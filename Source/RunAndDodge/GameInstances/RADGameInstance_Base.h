@@ -12,16 +12,42 @@ UCLASS()
 class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 {
 	GENERATED_BODY()
-	
+
 private:
-	// Settings variables
+	// Переменные для настроек
+
+	// Переменная вертикальной синхронизации
 	bool bIsVSync = false;
+	// Переменная для установки разрешения экрана
+	FIntPoint screenResolution;
+	// Переменная для установки качества текстур
+	int textureQuality;
+	// Переменная для установки качества текстур
+	int shadowsQuality;
+	// ==================================================== //
 
 public:
-	// Setting a Boolean variable to denote VSYNC
+	// Установка булевой переменной для вертикальной синхронизации
 	UFUNCTION(BlueprintCallable)
 	void SetbIsVSync(const bool& vSync);
-	// Getting a Boolean variable VSYNC
+	// Получение булевой переменной для вертикальной синхронизации
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool GetbIsVSync() const;
+	// ============================================================= //
+
+	// Установка разрешения экрана
+	UFUNCTION(BlueprintCallable)
+	void SetScreenResolution(const FIntPoint& screenResolution);
+	// Получение разрешения экрана
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	FIntPoint GetScreenResolution() const;
+	// ============================================================= //
+
+	// Установка качества текстур
+	UFUNCTION(BlueprintCallable)
+	void SetTexturesQuality(const int& quality);
+	// Получение качества текстур
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int GetTexturesQuality() const;
+	// ============================================================= //
 };
