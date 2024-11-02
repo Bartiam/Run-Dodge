@@ -6,10 +6,4 @@
 void ARADCastleGameMode_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	SetupSettingsForGameMode();
-}
-
-void ARADCastleGameMode_Base::SetupSettingsForGameMode()
-{
-
 }

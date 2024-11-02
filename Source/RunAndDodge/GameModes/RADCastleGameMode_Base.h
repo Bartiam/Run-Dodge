@@ -6,17 +6,16 @@
 #include "GameFramework/GameModeBase.h"
 #include "RADCastleGameMode_Base.generated.h"
 
-
+class URADGameInstance_Base;
 
 UCLASS()
 class RUNANDDODGE_API ARADCastleGameMode_Base : public AGameModeBase
 {
 	GENERATED_BODY()
+
+	URADGameInstance_Base* gameInstance;
 	
 protected:
 	virtual void BeginPlay() override;
 
-private:
-	// Устновка настроек для текущего Game mode
-	void SetupSettingsForGameMode();
 };

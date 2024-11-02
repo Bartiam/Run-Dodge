@@ -6,48 +6,60 @@
 #include "Engine/GameInstance.h"
 #include "RADGameInstance_Base.generated.h"
 
-
-
 UCLASS()
 class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 {
 	GENERATED_BODY()
 
 private:
-	// Переменные для настроек
 
-	// Переменная вертикальной синхронизации
-	bool bIsVSync = false;
-	// Переменная для установки разрешения экрана
-	FIntPoint screenResolution;
-	// Переменная для установки качества текстур
-	int textureQuality;
-	// Переменная для установки качества текстур
-	int shadowsQuality;
+	// Variables for graphics
+
+		bool bIsVSync = false;
+
+		int textureQuality;
+
+		int shadowsQuality;
+
+		int smoothing;
 	// ==================================================== //
 
 public:
-	// Установка булевой переменной для вертикальной синхронизации
-	UFUNCTION(BlueprintCallable)
-	void SetbIsVSync(const bool& vSync);
-	// Получение булевой переменной для вертикальной синхронизации
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool GetbIsVSync() const;
-	// ============================================================= //
+	// Getters and setters for settings
+		
+		// VSync
+		UFUNCTION(BlueprintCallable)
+		void SetbIsVSync(const bool& vSync);
 
-	// Установка разрешения экрана
-	UFUNCTION(BlueprintCallable)
-	void SetScreenResolution(const FIntPoint& screenResolution);
-	// Получение разрешения экрана
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	FIntPoint GetScreenResolution() const;
-	// ============================================================= //
+		UFUNCTION(BlueprintCallable, BlueprintPure)
+		bool GetbIsVSync() const;
 
-	// Установка качества текстур
-	UFUNCTION(BlueprintCallable)
-	void SetTexturesQuality(const int& quality);
-	// Получение качества текстур
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	int GetTexturesQuality() const;
+
+
+		// Textures
+		UFUNCTION(BlueprintCallable)
+		void SetTexturesQuality(const int& quality);
+
+		UFUNCTION(BlueprintCallable, BlueprintPure)
+		int GetTexturesQuality() const;
+
+
+
+		// Shadows
+		UFUNCTION(BlueprintCallable)
+		void SetShadowsQuality(const int& quality);
+
+		UFUNCTION(BlueprintCallable, BlueprintPure)
+		int GetShadowsQuality() const;
+
+
+
+		// Smoothing
+		UFUNCTION(BlueprintCallable)
+		void SetSmoothing(const int& smooth);
+
+		UFUNCTION(BlueprintCallable, BlueprintPure)
+		int GetSmoothing() const;
+
 	// ============================================================= //
 };
