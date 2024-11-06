@@ -19,6 +19,10 @@ ARADCharacter_Base::ARADCharacter_Base()
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
 
+	// Configure character movement
+	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.0f, 0.f); // ...at this rotation rate
+
 	// Create spring arm
 	springArm = CreateDefaultSubobject<USpringArmComponent>(FName("Spring Arm"));
 	springArm->SetupAttachment(RootComponent);

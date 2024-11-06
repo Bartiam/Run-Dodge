@@ -6,9 +6,6 @@
 #include "GameFramework/Character.h"
 #include "RADCharacter_Base.generated.h"
 
-class UCameraComponent;
-class USpringArmComponent;
-
 UCLASS()
 class RUNANDDODGE_API ARADCharacter_Base : public ACharacter
 {
@@ -33,7 +30,7 @@ public:
 private:
 	// Character camera component
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
-	USpringArmComponent* springArm;
+	class USpringArmComponent* springArm;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
-	UCameraComponent* camera;
+	class UCameraComponent* camera;
 };
