@@ -13,7 +13,7 @@
 // Sets default values
 ARADCharacter_Base::ARADCharacter_Base()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Set this character to call Tick() every frame.  You can turn this off to improve pe		rformance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.
@@ -25,9 +25,8 @@ ARADCharacter_Base::ARADCharacter_Base()
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.0f, 0.f); // ...at this rotation rate
 	GetCharacterMovement()->MaxWalkSpeed = characterSpeed.simpleRunSpeed;
+	GetCharacterMovement()->MaxWalkSpeedCrouched = characterSpeed.crouchSpeed;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
-	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanFly = false;
-	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanSwim = false;
 
 	// Create spring arm
 	springArm = CreateDefaultSubobject<USpringArmComponent>(FName("Spring Arm"));
@@ -76,10 +75,10 @@ void ARADCharacter_Base::UpdateMovementSpeed()
 	switch (currentMovementState)
 	{
 	case EMovementState::CROUCH:
-		GetCharacterMovement()->MaxWalkSpeed = characterSpeed.crouchSpeed;
+		GetCharacterMovement()->MaxWalkSpeedCrouched = characterSpeed.crouchSpeed;
 		break;
 	case EMovementState::FAST_CROUCH:
-		GetCharacterMovement()->MaxWalkSpeed = characterSpeed.fastCrouchSpeed;
+		GetCharacterMovement()->MaxWalkSpeedCrouched = characterSpeed.fastCrouchSpeed;
 		break;
 	case EMovementState::WALK:
 		GetCharacterMovement()->MaxWalkSpeed = characterSpeed.walkSpeed;
@@ -105,20 +104,19 @@ const UStaminaComponent_Base* ARADCharacter_Base::GetStaminaComponent() const
 
 void ARADCharacter_Base::UpdateMovementState()
 {
-	if (bIsSprint && (currentMovementState == EMovementState::CROUCH 
-		|| currentMovementState == EMovementState::FAST_CROUCH))
+	if (bIsCharacterSprint && GetCharacterMovement()->IsCrouching())
 	{
 		currentMovementState = EMovementState::FAST_CROUCH;
 	}
-	else if (bIsSprint)
-	{
-		currentMovementState = EMovementState::SPRINT;
-	}
-	else if (bIsCrouch)
+	else if (GetCharacterMovement()->IsCrouching())
 	{
 		currentMovementState = EMovementState::CROUCH;
 	}
-	else if (bIsWalk)
+	else if (bIsCharacterSprint)
+	{
+		currentMovementState = EMovementState::SPRINT;
+	}
+	else if (bIsCharacterWalk)
 	{
 		currentMovementState = EMovementState::WALK;
 	}

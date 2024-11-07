@@ -97,36 +97,36 @@ void ARAD_PlayerController_Base::LookCharacter(const FInputActionValue& value)
 
 void ARAD_PlayerController_Base::SprintCharacter()
 {
-	character->bIsSprint = true;
+	character->bIsCharacterSprint = true;
 	character->UpdateMovementState();
 }
 
 void ARAD_PlayerController_Base::SprintStopped()
 {
-	character->bIsSprint = false;
+	character->bIsCharacterSprint = false;
 	character->UpdateMovementState();
 }
 
 void ARAD_PlayerController_Base::CrouchCharacter()
 {
-	character->bIsCrouch = true;
+	character->Crouch();
 	character->UpdateMovementState();
 }
 
 void ARAD_PlayerController_Base::CrouchStopped()
 {
-	character->bIsCrouch = false;
+	character->UnCrouch();
 	character->UpdateMovementState();
 }
 
 void ARAD_PlayerController_Base::WalkingCharacter()
 {
-	character->bIsWalk = true;
+	character->bIsCharacterWalk = true;
 	character->UpdateMovementState();
 }
 
 void ARAD_PlayerController_Base::WalkStopped()
 {
-	character->bIsWalk = false;
+	character->bIsCharacterWalk = false;
 	character->UpdateMovementState();
 }

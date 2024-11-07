@@ -73,12 +73,8 @@ public: // Public variables
 	FCharacterSpeed characterSpeed;
 
 	// Flags for change movement state
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bool value")
-	bool bIsSprint = false;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bool value")
-	bool bIsCrouch = false;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Bool value")
-	bool bIsWalk = false;
+	bool bIsCharacterSprint = false;
+	bool bIsCharacterWalk = false;
 
 public: // Public functions
 
