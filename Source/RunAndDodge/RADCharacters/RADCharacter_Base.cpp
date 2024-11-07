@@ -2,6 +2,7 @@
 
 
 #include "../RADCharacters/RADCharacter_Base.h"
+#include "../ActorComponents/HealthComponent_Base.h"
 
 #include "Camera/CameraComponent.h"
 
@@ -37,6 +38,9 @@ ARADCharacter_Base::ARADCharacter_Base()
 	camera = CreateDefaultSubobject<UCameraComponent>(FName("Camera"));
 	camera->SetupAttachment(springArm);
 	camera->bUsePawnControlRotation = true;
+
+	// Create health component
+	healthComponent = CreateDefaultSubobject<UHealthComponent_Base>(FName("Health component"));
 }
 
 // Called when the game starts or when spawned
@@ -58,5 +62,10 @@ void ARADCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+UHealthComponent_Base* ARADCharacter_Base::GetHealthComponent() const
+{
+	return healthComponent;
 }
 

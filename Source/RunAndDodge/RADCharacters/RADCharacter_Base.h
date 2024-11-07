@@ -30,7 +30,16 @@ public:
 private:
 	// Character camera component
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* springArm;
+	class USpringArmComponent* springArm = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* camera;
+	class UCameraComponent* camera = nullptr;
+
+	// Character health component
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health components", meta = (AllowPrivateAccess = "true"))
+	class UHealthComponent_Base* healthComponent = nullptr;
+
+public:
+	// Getter for health component
+	UFUNCTION()
+	UHealthComponent_Base* GetHealthComponent() const;
 };

@@ -50,5 +50,5 @@ private: // Private functions
 private: // Private variables
 	const FInputModeGameOnly inputMode;
 
-	class ARADCharacter_Base* character;
+	class ARADCharacter_Base* character = nullptr;
 };
