@@ -3,6 +3,7 @@
 
 #include "../RADCharacters/RADCharacter_Base.h"
 #include "../ActorComponents/HealthComponent_Base.h"
+#include "../ActorComponents/StaminaComponent_Base.h"
 
 #include "Camera/CameraComponent.h"
 
@@ -41,6 +42,8 @@ ARADCharacter_Base::ARADCharacter_Base()
 
 	// Create health component
 	healthComponent = CreateDefaultSubobject<UHealthComponent_Base>(FName("Health component"));
+	// Create stamina component
+	staminaComponent = CreateDefaultSubobject<UStaminaComponent_Base>(FName("Stamina component"));
 }
 
 // Called when the game starts or when spawned
@@ -64,8 +67,13 @@ void ARADCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 }
 
-UHealthComponent_Base* ARADCharacter_Base::GetHealthComponent() const
+const UHealthComponent_Base* ARADCharacter_Base::GetHealthComponent() const
 {
 	return healthComponent;
+}
+
+const UStaminaComponent_Base* ARADCharacter_Base::GetStaminaComponent() const
+{
+	return staminaComponent;
 }
 

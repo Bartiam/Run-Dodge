@@ -26,4 +26,7 @@ public:
 	// Getter for character health
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetCurrentHealth() const;
+	// Getter for character stamina
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetCurrentStamina() const;
 };

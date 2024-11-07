@@ -4,19 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "HealthComponent_Base.generated.h"
+#include "StaminaComponent_Base.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class RUNANDDODGE_API UHealthComponent_Base : public UActorComponent
+class RUNANDDODGE_API UStaminaComponent_Base : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
-	UHealthComponent_Base();
-	// Sets default public values for this component's properties
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-	float defaultHealth = 100.f;
+	UStaminaComponent_Base();
+
+	// Sets default variables for this component's properties
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stamina")
+	float defaultStamina = 100.f;
 
 protected:
 	// Called when the game starts
@@ -27,16 +28,14 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-	// Private variable for this actor component
+	// Private variables for this actor component
 	UPROPERTY()
-	float currentHealth = 0.f;
+	float currentStamina = 0.f;
 
 public: // Getters and setters for this actor component
-
-	// Getter and setter current health
+	// Getter and setter for stamina
 	UFUNCTION()
-	void SetCurrentHealth(const float& newHealth);
+	void SetCurrentStamina(const float& newStamina);
 	UFUNCTION()
-	float GetCurrentHealth() const;
-		
+	float GetCurrentStamina() const;
 };

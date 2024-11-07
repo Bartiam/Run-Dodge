@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "RADCharacter_Base.generated.h"
 
+class UHealthComponent_Base;
+class UStaminaComponent_Base;
+
 UCLASS()
 class RUNANDDODGE_API ARADCharacter_Base : public ACharacter
 {
@@ -36,10 +39,16 @@ private:
 
 	// Character health component
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health components", meta = (AllowPrivateAccess = "true"))
-	class UHealthComponent_Base* healthComponent = nullptr;
+	UHealthComponent_Base* healthComponent = nullptr;
+	// Character stamina component
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stamina component", meta = (AllowPrivateAccess = "true"))
+	UStaminaComponent_Base* staminaComponent = nullptr;
 
 public:
 	// Getter for health component
 	UFUNCTION()
-	UHealthComponent_Base* GetHealthComponent() const;
+	const UHealthComponent_Base* GetHealthComponent() const;
+	// Getter for stamina component
+	UFUNCTION()
+	const UStaminaComponent_Base* GetStaminaComponent() const;
 };
