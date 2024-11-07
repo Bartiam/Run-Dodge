@@ -14,9 +14,9 @@ struct FCharacterSpeed
 	GENERATED_BODY()
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement speed")
-	float crounchSpeed = 150.f;
+	float crouchSpeed = 150.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement speed")
-	float crounchRunSpeed = 300.f;
+	float fastCrouchSpeed = 300.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement speed")
 	float walkSpeed = 300.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement speed")
@@ -28,8 +28,8 @@ struct FCharacterSpeed
 UENUM(BlueprintType)
 enum class EMovementState : uint8
 {
-	CROUNCH UMETA(DisplayName = "Crounch state"),
-	CROUNCH_RUN UMETA(DisplayName = "Crounch run state"),
+	CROUCH UMETA(DisplayName = "Crounch state"),
+	FAST_CROUCH UMETA(DisplayName = "Crounch run state"),
 	WALK UMETA(DisplayName = "Walk state"),
 	SIMPLE_RUN UMETA(DisplayName = "Simple run state"),
 	SPRINT UMETA(DisplayName = "Sprint state")

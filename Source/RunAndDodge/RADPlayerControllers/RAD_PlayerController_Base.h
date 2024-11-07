@@ -27,6 +27,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	UInputAction* sprintInputCharacter = nullptr;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	UInputAction* crouchInputCharacter = nullptr;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	UInputAction* walkInputCharacter = nullptr;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	class UInputMappingContext* inputMappingContext = nullptr;
 
 private: // Private functions
@@ -57,6 +61,22 @@ private: // Private functions
 	// Player stop sprint
 	UFUNCTION()
 	void SprintStopped();
+
+	// Player crouch
+	UFUNCTION()
+	void CrouchCharacter();
+
+	// Player stop crouch
+	UFUNCTION()
+	void CrouchStopped();
+
+	// Player walking
+	UFUNCTION()
+	void WalkingCharacter();
+
+	// Player stop walking
+	UFUNCTION()
+	void WalkStopped();
 
 private: // Private variables
 	const FInputModeGameOnly inputMode;

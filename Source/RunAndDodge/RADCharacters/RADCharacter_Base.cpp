@@ -24,7 +24,10 @@ ARADCharacter_Base::ARADCharacter_Base()
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.0f, 0.f); // ...at this rotation rate
-	GetCharacterMovement()->MaxWalkSpeed = characterSpeed.simpleRunSpeed; // Default speed
+	GetCharacterMovement()->MaxWalkSpeed = characterSpeed.simpleRunSpeed;
+	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
+	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanFly = false;
+	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanSwim = false;
 
 	// Create spring arm
 	springArm = CreateDefaultSubobject<USpringArmComponent>(FName("Spring Arm"));
@@ -72,11 +75,14 @@ void ARADCharacter_Base::UpdateMovementSpeed()
 {
 	switch (currentMovementState)
 	{
-	case EMovementState::CROUNCH:
+	case EMovementState::CROUCH:
+		GetCharacterMovement()->MaxWalkSpeed = characterSpeed.crouchSpeed;
 		break;
-	case EMovementState::CROUNCH_RUN:
+	case EMovementState::FAST_CROUCH:
+		GetCharacterMovement()->MaxWalkSpeed = characterSpeed.fastCrouchSpeed;
 		break;
 	case EMovementState::WALK:
+		GetCharacterMovement()->MaxWalkSpeed = characterSpeed.walkSpeed;
 		break;
 	case EMovementState::SIMPLE_RUN:
 		GetCharacterMovement()->MaxWalkSpeed = characterSpeed.simpleRunSpeed;
@@ -99,10 +105,27 @@ const UStaminaComponent_Base* ARADCharacter_Base::GetStaminaComponent() const
 
 void ARADCharacter_Base::UpdateMovementState()
 {
-	if (bIsSprint)
+	if (bIsSprint && (currentMovementState == EMovementState::CROUCH 
+		|| currentMovementState == EMovementState::FAST_CROUCH))
+	{
+		currentMovementState = EMovementState::FAST_CROUCH;
+	}
+	else if (bIsSprint)
+	{
 		currentMovementState = EMovementState::SPRINT;
+	}
+	else if (bIsCrouch)
+	{
+		currentMovementState = EMovementState::CROUCH;
+	}
+	else if (bIsWalk)
+	{
+		currentMovementState = EMovementState::WALK;
+	}
 	else
+	{
 		currentMovementState = EMovementState::SIMPLE_RUN;
+	}
 
 
 	UpdateMovementSpeed();

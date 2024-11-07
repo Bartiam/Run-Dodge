@@ -46,7 +46,13 @@ void ARAD_PlayerController_Base::SetupInputComponent()
 		enhancedInputComponent->BindAction(sprintInputCharacter, ETriggerEvent::Triggered, this, &ARAD_PlayerController_Base::SprintCharacter);
 		enhancedInputComponent->BindAction(sprintInputCharacter, ETriggerEvent::Completed, this, &ARAD_PlayerController_Base::SprintStopped);
 
-		// Bind crounch
+		// Bind crouch
+		enhancedInputComponent->BindAction(crouchInputCharacter, ETriggerEvent::Triggered, this, &ARAD_PlayerController_Base::CrouchCharacter);
+		enhancedInputComponent->BindAction(crouchInputCharacter, ETriggerEvent::Completed, this, &ARAD_PlayerController_Base::CrouchStopped);
+
+		// Bind walk
+		enhancedInputComponent->BindAction(walkInputCharacter, ETriggerEvent::Triggered, this, &ARAD_PlayerController_Base::WalkingCharacter);
+		enhancedInputComponent->BindAction(walkInputCharacter, ETriggerEvent::Completed, this, &ARAD_PlayerController_Base::WalkStopped);
 	}
 }
 
@@ -98,5 +104,29 @@ void ARAD_PlayerController_Base::SprintCharacter()
 void ARAD_PlayerController_Base::SprintStopped()
 {
 	character->bIsSprint = false;
+	character->UpdateMovementState();
+}
+
+void ARAD_PlayerController_Base::CrouchCharacter()
+{
+	character->bIsCrouch = true;
+	character->UpdateMovementState();
+}
+
+void ARAD_PlayerController_Base::CrouchStopped()
+{
+	character->bIsCrouch = false;
+	character->UpdateMovementState();
+}
+
+void ARAD_PlayerController_Base::WalkingCharacter()
+{
+	character->bIsWalk = true;
+	character->UpdateMovementState();
+}
+
+void ARAD_PlayerController_Base::WalkStopped()
+{
+	character->bIsWalk = false;
 	character->UpdateMovementState();
 }
