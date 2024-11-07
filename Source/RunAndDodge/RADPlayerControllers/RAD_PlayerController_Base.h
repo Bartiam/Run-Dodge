@@ -25,9 +25,12 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	UInputAction* jumpInputCharacter = nullptr;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	UInputAction* sprintInputCharacter = nullptr;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	class UInputMappingContext* inputMappingContext = nullptr;
 
 private: // Private functions
+
 	// player input
 	virtual void SetupInputComponent() override;
 
@@ -47,8 +50,18 @@ private: // Private functions
 	UFUNCTION()
 	void LookCharacter(const FInputActionValue& value);
 
+	// Player sprint
+	UFUNCTION()
+	void SprintCharacter();
+
+	// Player stop sprint
+	UFUNCTION()
+	void SprintStopped();
+
 private: // Private variables
 	const FInputModeGameOnly inputMode;
 
 	class ARADCharacter_Base* character = nullptr;
+
+	FTimerHandle timerToAccelirationRun;
 };

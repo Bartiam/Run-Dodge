@@ -41,6 +41,12 @@ void ARAD_PlayerController_Base::SetupInputComponent()
 
 		// Bind look
 		enhancedInputComponent->BindAction(lookInputCharacter, ETriggerEvent::Triggered, this, &ARAD_PlayerController_Base::LookCharacter);
+
+		// Bind sprint
+		enhancedInputComponent->BindAction(sprintInputCharacter, ETriggerEvent::Triggered, this, &ARAD_PlayerController_Base::SprintCharacter);
+		enhancedInputComponent->BindAction(sprintInputCharacter, ETriggerEvent::Completed, this, &ARAD_PlayerController_Base::SprintStopped);
+
+		// Bind crounch
 	}
 }
 
@@ -81,4 +87,16 @@ void ARAD_PlayerController_Base::LookCharacter(const FInputActionValue& value)
 
 	AddYawInput(lookAxisVector.X);
 	AddPitchInput(lookAxisVector.Y);
+}
+
+void ARAD_PlayerController_Base::SprintCharacter()
+{
+	character->bIsSprint = true;
+	character->UpdateMovementState();
+}
+
+void ARAD_PlayerController_Base::SprintStopped()
+{
+	character->bIsSprint = false;
+	character->UpdateMovementState();
 }

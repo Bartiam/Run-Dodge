@@ -24,6 +24,7 @@ ARADCharacter_Base::ARADCharacter_Base()
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.0f, 0.f); // ...at this rotation rate
+	GetCharacterMovement()->MaxWalkSpeed = characterSpeed.simpleRunSpeed; // Default speed
 
 	// Create spring arm
 	springArm = CreateDefaultSubobject<USpringArmComponent>(FName("Spring Arm"));
@@ -67,6 +68,25 @@ void ARADCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 }
 
+void ARADCharacter_Base::UpdateMovementSpeed()
+{
+	switch (currentMovementState)
+	{
+	case EMovementState::CROUNCH:
+		break;
+	case EMovementState::CROUNCH_RUN:
+		break;
+	case EMovementState::WALK:
+		break;
+	case EMovementState::SIMPLE_RUN:
+		GetCharacterMovement()->MaxWalkSpeed = characterSpeed.simpleRunSpeed;
+		break;
+	case EMovementState::SPRINT:
+		GetCharacterMovement()->MaxWalkSpeed = characterSpeed.sprintSpeed;
+		break;
+	}
+}
+
 const UHealthComponent_Base* ARADCharacter_Base::GetHealthComponent() const
 {
 	return healthComponent;
@@ -75,5 +95,16 @@ const UHealthComponent_Base* ARADCharacter_Base::GetHealthComponent() const
 const UStaminaComponent_Base* ARADCharacter_Base::GetStaminaComponent() const
 {
 	return staminaComponent;
+}
+
+void ARADCharacter_Base::UpdateMovementState()
+{
+	if (bIsSprint)
+		currentMovementState = EMovementState::SPRINT;
+	else
+		currentMovementState = EMovementState::SIMPLE_RUN;
+
+
+	UpdateMovementSpeed();
 }
 
