@@ -27,6 +27,7 @@ ARADCharacter_Base::ARADCharacter_Base()
 	GetCharacterMovement()->MaxWalkSpeed = characterSpeed.simpleRunSpeed;
 	GetCharacterMovement()->MaxWalkSpeedCrouched = characterSpeed.crouchSpeed;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
+	GetCharacterMovement()->JumpZVelocity = 1000.f;
 
 	// Create spring arm
 	springArm = CreateDefaultSubobject<USpringArmComponent>(FName("Spring Arm"));
@@ -124,7 +125,6 @@ void ARADCharacter_Base::UpdateMovementState()
 	{
 		currentMovementState = EMovementState::SIMPLE_RUN;
 	}
-
 
 	UpdateMovementSpeed();
 }
