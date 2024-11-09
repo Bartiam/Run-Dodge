@@ -41,14 +41,6 @@ private: // Private variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* camera = nullptr;
 
-	// Character health component
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health components", meta = (AllowPrivateAccess = "true"))
-	UHealthComponent_Base* healthComponent = nullptr;
-
-	// Character stamina component
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stamina component", meta = (AllowPrivateAccess = "true"))
-	UStaminaComponent_Base* staminaComponent = nullptr;
-
 	// character movement state
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement state", meta = (AllowPrivateAccess = "true"))
 	EMovementState currentMovementState;
@@ -56,6 +48,7 @@ private: // Private variables
 	// Character updates movement speed
 	UFUNCTION()
 	void UpdateMovementSpeed();
+
 
 public: // Getters and setters
 
@@ -76,6 +69,15 @@ public: // Public variables
 	// Flags for change movement state
 	bool bIsCharacterSprint = false;
 	bool bIsCharacterWalk = false;
+	bool bIsCharacterTired = false;
+
+	// Character health component
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health components", meta = (AllowPrivateAccess = "true"))
+	UHealthComponent_Base* healthComponent = nullptr;
+
+	// Character stamina component
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stamina component", meta = (AllowPrivateAccess = "true"))
+	UStaminaComponent_Base* staminaComponent = nullptr;
 
 public: // Public functions
 
