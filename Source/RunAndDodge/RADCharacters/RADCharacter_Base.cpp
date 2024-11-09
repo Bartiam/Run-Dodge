@@ -28,6 +28,7 @@ ARADCharacter_Base::ARADCharacter_Base()
 	GetCharacterMovement()->MaxWalkSpeedCrouched = characterSpeed.crouchSpeed;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 	GetCharacterMovement()->JumpZVelocity = 1000.f;
+	GetCharacterMovement()->CrouchedHalfHeight = 88.f;
 
 	// Create spring arm
 	springArm = CreateDefaultSubobject<USpringArmComponent>(FName("Spring Arm"));

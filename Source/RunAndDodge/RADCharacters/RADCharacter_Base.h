@@ -11,6 +11,7 @@
 
 class UHealthComponent_Base;
 class UStaminaComponent_Base;
+class UAnimMontage;
 
 UCLASS()
 class RUNANDDODGE_API ARADCharacter_Base : public ACharacter
