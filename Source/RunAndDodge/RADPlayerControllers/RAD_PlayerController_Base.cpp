@@ -77,14 +77,14 @@ void ARAD_PlayerController_Base::MovementCharacter(const FInputActionValue& valu
 
 void ARAD_PlayerController_Base::JumpCharacter()
 {
-	if (IsValid(character))
-		character->Jump();
+	character->Jump();
+	character->bIsCharacterJump = true;
 }
 
 void ARAD_PlayerController_Base::StopJumpCharacter()
 {
-	if (IsValid(character))
-		character->StopJumping();
+	character->StopJumping();
+	character->bIsCharacterJump = false;
 }
 
 void ARAD_PlayerController_Base::LookCharacter(const FInputActionValue& value)

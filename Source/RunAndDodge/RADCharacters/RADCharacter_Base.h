@@ -70,6 +70,8 @@ public: // Public variables
 	bool bIsCharacterSprint = false;
 	bool bIsCharacterWalk = false;
 	bool bIsCharacterTired = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool bIsCharacterJump = false;
 
 	// Character health component
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health components", meta = (AllowPrivateAccess = "true"))

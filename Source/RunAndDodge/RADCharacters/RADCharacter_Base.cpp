@@ -117,7 +117,6 @@ void ARADCharacter_Base::UpdateMovementState()
 	if (bIsCharacterSprint && GetCharacterMovement()->IsCrouching())
 	{
 		currentMovementState = EMovementState::FAST_CROUCH;
-		staminaComponent->ReduseStamina();
 	}
 	else if (GetCharacterMovement()->IsCrouching())
 	{
@@ -126,7 +125,6 @@ void ARADCharacter_Base::UpdateMovementState()
 	else if (bIsCharacterSprint)
 	{
 		currentMovementState = EMovementState::SPRINT;
-		staminaComponent->ReduseStamina();
 	}
 	else if (bIsCharacterWalk)
 	{

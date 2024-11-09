@@ -5,6 +5,7 @@
 #include "../RADCharacters/RADCharacter_Base.h"
 
 #include "Kismet/GameplayStatics.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values for this component's properties
 UStaminaComponent_Base::UStaminaComponent_Base()
@@ -34,6 +35,9 @@ void UStaminaComponent_Base::TickComponent(float DeltaTime, ELevelTick TickType,
 
 	if (bIsCanIncreaseStamina)
 		AugmentStamina();
+
+	if (characterOwner->bIsCharacterSprint)
+		ReduseStamina();
 }
 
 void UStaminaComponent_Base::SetCurrentStamina(const float& newStamina)
@@ -52,6 +56,7 @@ void UStaminaComponent_Base::ReduseStamina()
 	{
 		bIsCanIncreaseStamina = false;
 		bIsStartsTimerToIncreaseStamina = false;
+
 		currentStamina -= numberWhichStaminaChanges;
 	}
 

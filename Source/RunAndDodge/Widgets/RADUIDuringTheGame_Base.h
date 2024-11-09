@@ -21,6 +21,8 @@ private:
 	class ARADCharacter_Base* character = nullptr;
 	UPROPERTY()
 	class UHealthComponent_Base* characterHealthComponent = nullptr;
+	UPROPERTY()
+	class ARADCastleCameState_Base* gameState;
 
 public:
 	// Getter for character health
@@ -29,4 +31,7 @@ public:
 	// Getter for character stamina
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetCurrentStamina() const;
+	// Getter for current time
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetCurrentTime() const;
 };
