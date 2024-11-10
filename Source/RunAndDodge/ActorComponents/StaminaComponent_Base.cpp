@@ -52,7 +52,7 @@ float UStaminaComponent_Base::GetCurrentStamina() const
 
 void UStaminaComponent_Base::ReduseStamina()
 {
-	if (!characterOwner->GetVelocity().IsZero())
+	if (!characterOwner->GetVelocity().IsZero() && !(characterOwner->GetCharacterMovement()->IsFalling()))
 	{
 		bIsCanIncreaseStamina = false;
 		bIsStartsTimerToIncreaseStamina = false;
@@ -89,7 +89,7 @@ void UStaminaComponent_Base::AugmentStamina()
 
 	if (currentStamina >= recoveryFromTired)
 	{
-		bIsCharacterTired = false;
+		characterOwner->bIsCharacterTired = false;
 
 		auto myPlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 		FKey shiftKey = EKeys::LeftShift;

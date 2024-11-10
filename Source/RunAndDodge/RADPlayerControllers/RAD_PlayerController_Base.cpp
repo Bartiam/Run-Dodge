@@ -97,8 +97,11 @@ void ARAD_PlayerController_Base::LookCharacter(const FInputActionValue& value)
 
 void ARAD_PlayerController_Base::SprintCharacter()
 {
-	character->bIsCharacterSprint = true;
-	character->UpdateMovementState();
+	if (!character->bIsCharacterTired)
+	{
+		character->bIsCharacterSprint = true;
+		character->UpdateMovementState();
+	}
 }
 
 void ARAD_PlayerController_Base::SprintStopped()

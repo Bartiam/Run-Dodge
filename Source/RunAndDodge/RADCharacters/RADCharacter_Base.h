@@ -70,6 +70,7 @@ public: // Public variables
 	bool bIsCharacterSprint = false;
 	bool bIsCharacterWalk = false;
 	bool bIsCharacterTired = false;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool bIsCharacterJump = false;
 

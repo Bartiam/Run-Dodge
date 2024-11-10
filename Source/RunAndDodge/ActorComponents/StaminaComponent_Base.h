@@ -30,7 +30,6 @@ public:
 public: // public variables 
 
 	// Variables for calculate stamina
-	bool bIsCharacterTired = false;
 	bool bIsCanIncreaseStamina = false;
 	bool bIsStartsTimerToIncreaseStamina = false;
 
