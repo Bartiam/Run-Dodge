@@ -35,16 +35,18 @@ public: // public variables
 
 	FTimerHandle timerToAugmentStamina;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Stamina")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
 	float decreaseStamina = 1.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Stamina")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
 	float increaseStamina = 1.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Stamina")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
 	float recoveryFromTired = 40.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Stamina")
-	float timeToRecoverStamina = 0.5f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Stamina")
-	float timeToRecoverStaminaAfterZero = 2.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
+	float timeToRecoverStamina = 1.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
+	float timeToRecoverStaminaAfterZero = 3.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
+	float staminaSpentOnJump = 0.f;
 
 	UPROPERTY()
 	float numberWhichStaminaChanges = 0.f;
@@ -67,13 +69,22 @@ public: // Getters and setters for this actor component
 
 public: // public functions
 
+	// Reduced stamina when jumping
 	UFUNCTION()
-	void ReduseStamina();
+	void ReduseStaminaJump();
 
+	// Reduced stamina when running
+	UFUNCTION()
+	void ReduseStaminaShift();
+
+	// Augmented stamina when not running
 	UFUNCTION()
 	void AugmentStamina();
 
 private: // private functions
+
+	UFUNCTION()
+	void TimerToIncreaseStamina();
 
 	UFUNCTION()
 	void ChangeCanIncreaseStamina();

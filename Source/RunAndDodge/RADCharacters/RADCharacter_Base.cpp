@@ -27,7 +27,7 @@ ARADCharacter_Base::ARADCharacter_Base()
 	GetCharacterMovement()->MaxWalkSpeed = characterSpeed.simpleRunSpeed;
 	GetCharacterMovement()->MaxWalkSpeedCrouched = characterSpeed.crouchSpeed;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
-	GetCharacterMovement()->JumpZVelocity = 1000.f;
+	GetCharacterMovement()->JumpZVelocity = 700.f;
 	GetCharacterMovement()->CrouchedHalfHeight = 88.f;
 
 	// Create spring arm
@@ -136,5 +136,16 @@ void ARADCharacter_Base::UpdateMovementState()
 	}
 
 	UpdateMovementSpeed();
+}
+
+void ARADCharacter_Base::CharacterJumping()
+{
+	if (!GetCharacterMovement()->IsFalling() && 
+		staminaComponent->GetCurrentStamina() > staminaComponent->staminaSpentOnJump)
+	{
+		Jump();
+		bIsCharacterJump = true;
+		staminaComponent->ReduseStaminaJump();
+	}
 }
 

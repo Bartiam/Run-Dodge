@@ -6,8 +6,6 @@
 #include "Blueprint/UserWidget.h"
 #include "RADUIDuringTheGame_Base.generated.h"
 
-
-
 UCLASS()
 class RUNANDDODGE_API URADUIDuringTheGame_Base : public UUserWidget
 {
@@ -23,6 +21,8 @@ private:
 	class UHealthComponent_Base* characterHealthComponent = nullptr;
 	UPROPERTY()
 	class ARADCastleCameState_Base* gameState;
+	UPROPERTY()
+	FColor colorOfBorder = FColor::Purple;
 
 public:
 	// Getter for character health
@@ -34,4 +34,7 @@ public:
 	// Getter for current time
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetCurrentTime() const;
+	// Getter for current border color
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	FLinearColor GetCurrentColor() const;
 };

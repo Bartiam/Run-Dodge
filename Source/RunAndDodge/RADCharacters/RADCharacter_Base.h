@@ -86,4 +86,7 @@ public: // Public functions
 
 	UFUNCTION()
 	void UpdateMovementState();
+
+	UFUNCTION()
+	void CharacterJumping();
 };

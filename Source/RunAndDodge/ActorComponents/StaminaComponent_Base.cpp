@@ -25,6 +25,7 @@ void UStaminaComponent_Base::BeginPlay()
 
 	currentStamina = defaultStamina;
 	characterOwner = Cast<ARADCharacter_Base>(GetOwner());
+	
 }
 
 
@@ -37,7 +38,7 @@ void UStaminaComponent_Base::TickComponent(float DeltaTime, ELevelTick TickType,
 		AugmentStamina();
 
 	if (characterOwner->bIsCharacterSprint)
-		ReduseStamina();
+		ReduseStaminaShift();
 }
 
 void UStaminaComponent_Base::SetCurrentStamina(const float& newStamina)
@@ -50,9 +51,20 @@ float UStaminaComponent_Base::GetCurrentStamina() const
 	return currentStamina;
 }
 
-void UStaminaComponent_Base::ReduseStamina()
+void UStaminaComponent_Base::ReduseStaminaJump()
 {
-	if (!characterOwner->GetVelocity().IsZero() && !(characterOwner->GetCharacterMovement()->IsFalling()))
+	bIsCanIncreaseStamina = false;
+	bIsStartsTimerToIncreaseStamina = false;
+
+	currentStamina -= staminaSpentOnJump;
+
+	TimerToIncreaseStamina();
+}
+
+void UStaminaComponent_Base::ReduseStaminaShift()
+{
+	if (!characterOwner->GetVelocity().IsNearlyZero() &&
+		!characterOwner->GetCharacterMovement()->IsFalling())
 	{
 		bIsCanIncreaseStamina = false;
 		bIsStartsTimerToIncreaseStamina = false;
@@ -60,27 +72,7 @@ void UStaminaComponent_Base::ReduseStamina()
 		currentStamina -= numberWhichStaminaChanges;
 	}
 
-	if (!bIsStartsTimerToIncreaseStamina)
-	{
-		GetWorld()->GetTimerManager().ClearTimer(timerToAugmentStamina);
-
-		if (currentStamina <= 0.f)
-		{
-			currentStamina = 0.f;
-			characterOwner->bIsCharacterSprint = false;
-			characterOwner->bIsCharacterTired = true;
-
-			characterOwner->UpdateMovementState();
-
-			GetWorld()->GetTimerManager().SetTimer(timerToAugmentStamina, this, &UStaminaComponent_Base::ChangeCanIncreaseStamina, timeToRecoverStaminaAfterZero, false);
-
-			return;
-		}
-
-		GetWorld()->GetTimerManager().SetTimer(timerToAugmentStamina, this, &UStaminaComponent_Base::ChangeCanIncreaseStamina, timeToRecoverStamina, false);
-
-		bIsStartsTimerToIncreaseStamina = true;
-	}
+	TimerToIncreaseStamina();
 }
 
 void UStaminaComponent_Base::AugmentStamina()
@@ -105,6 +97,31 @@ void UStaminaComponent_Base::AugmentStamina()
 	{
 		currentStamina = defaultStamina;
 		bIsCanIncreaseStamina = false;
+	}
+}
+
+void UStaminaComponent_Base::TimerToIncreaseStamina()
+{
+	if (!bIsStartsTimerToIncreaseStamina)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(timerToAugmentStamina);
+
+		if (currentStamina <= 0.f)
+		{
+			currentStamina = 0.f;
+			characterOwner->bIsCharacterSprint = false;
+			characterOwner->bIsCharacterTired = true;
+
+			characterOwner->UpdateMovementState();
+
+			GetWorld()->GetTimerManager().SetTimer(timerToAugmentStamina, this, &UStaminaComponent_Base::ChangeCanIncreaseStamina, timeToRecoverStaminaAfterZero, false);
+
+			return;
+		}
+
+		GetWorld()->GetTimerManager().SetTimer(timerToAugmentStamina, this, &UStaminaComponent_Base::ChangeCanIncreaseStamina, timeToRecoverStamina, false);
+
+		bIsStartsTimerToIncreaseStamina = true;
 	}
 }
 

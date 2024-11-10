@@ -77,8 +77,8 @@ void ARAD_PlayerController_Base::MovementCharacter(const FInputActionValue& valu
 
 void ARAD_PlayerController_Base::JumpCharacter()
 {
-	character->Jump();
-	character->bIsCharacterJump = true;
+	if (!character->bIsCharacterTired)
+		character->CharacterJumping();
 }
 
 void ARAD_PlayerController_Base::StopJumpCharacter()
