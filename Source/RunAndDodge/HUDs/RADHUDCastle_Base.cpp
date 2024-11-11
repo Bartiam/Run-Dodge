@@ -18,3 +18,8 @@ void ARADHUDCastle_Base::CreateWidgetDuringTheGame()
 	// Add widget to viewport
 	widgetDuringTheGame->AddToViewport();
 }
+
+URADUIDuringTheGame_Base* ARADHUDCastle_Base::GetWidgetDuringTheGame() const
+{
+	return widgetDuringTheGame;
+}

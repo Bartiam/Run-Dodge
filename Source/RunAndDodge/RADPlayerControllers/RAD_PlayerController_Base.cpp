@@ -3,6 +3,8 @@
 
 #include "../RADPlayerControllers/RAD_PlayerController_Base.h"
 #include "../RADCharacters/RADCharacter_Base.h"
+#include "../HUDs/RADHUDCastle_Base.h"
+#include "../Widgets/RADUIDuringTheGame_Base.h"
 
 #include "EnhancedInput/Public/EnhancedInputComponent.h"
 #include "InputAction.h"
@@ -23,6 +25,7 @@ void ARAD_PlayerController_Base::BeginPlay()
 	}
 
 	character = Cast<ARADCharacter_Base>(GetPawn());
+	HUD = Cast<ARADHUDCastle_Base>(GetHUD());
 }
 
 void ARAD_PlayerController_Base::SetupInputComponent()
@@ -78,7 +81,13 @@ void ARAD_PlayerController_Base::MovementCharacter(const FInputActionValue& valu
 void ARAD_PlayerController_Base::JumpCharacter()
 {
 	if (!character->bIsCharacterTired)
+	{
 		character->CharacterJumping();
+	}
+	else
+	{
+		HUD->GetWidgetDuringTheGame()->CharacterIsTired();
+	}
 }
 
 void ARAD_PlayerController_Base::StopJumpCharacter()
@@ -101,6 +110,10 @@ void ARAD_PlayerController_Base::SprintCharacter()
 	{
 		character->bIsCharacterSprint = true;
 		character->UpdateMovementState();
+	}
+	else
+	{
+		HUD->GetWidgetDuringTheGame()->CharacterIsTired();
 	}
 }
 

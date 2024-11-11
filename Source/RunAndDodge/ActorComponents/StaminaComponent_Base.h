@@ -42,12 +42,11 @@ public: // public variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
 	float recoveryFromTired = 40.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
-	float timeToRecoverStamina = 1.f;
+	float timeToRecoverStamina = 2.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
-	float timeToRecoverStaminaAfterZero = 3.f;
+	float timeToRecoverStaminaAfterZero = 4.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Stamina")
 	float staminaSpentOnJump = 0.f;
-
 	UPROPERTY()
 	float numberWhichStaminaChanges = 0.f;
 

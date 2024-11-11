@@ -82,6 +82,7 @@ private: // Private variables
 	const FInputModeGameOnly inputMode;
 
 	class ARADCharacter_Base* character = nullptr;
+	class ARADHUDCastle_Base* HUD = nullptr;
 
 	FTimerHandle timerToAccelirationRun;
 };

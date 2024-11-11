@@ -19,10 +19,6 @@ float URADUIDuringTheGame_Base::GetCurrentHealth() const
 {
 	if (IsValid(character))
 	{
-		// 333333FF
-
-		colorOfBorder.Purple;
-
 		return character->GetHealthComponent()->GetCurrentHealth() * 0.01f;
 	}
 
@@ -42,9 +38,4 @@ float URADUIDuringTheGame_Base::GetCurrentStamina() const
 float URADUIDuringTheGame_Base::GetCurrentTime() const
 {
 	return gameState->GetCurrentTimeSinceBeginLevel();
-}
-
-FLinearColor URADUIDuringTheGame_Base::GetCurrentColor() const
-{
-	return FLinearColor(colorOfBorder);
 }

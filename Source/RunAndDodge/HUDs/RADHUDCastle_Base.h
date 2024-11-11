@@ -6,7 +6,7 @@
 #include "GameFramework/HUD.h"
 #include "RADHUDCastle_Base.generated.h"
 
-
+class URADUIDuringTheGame_Base;
 
 UCLASS()
 class RUNANDDODGE_API ARADHUDCastle_Base : public AHUD
@@ -19,7 +19,7 @@ protected:
 private:
 	// Variable UI widget
 	UPROPERTY()
-	class URADUIDuringTheGame_Base* widgetDuringTheGame = nullptr;
+	URADUIDuringTheGame_Base* widgetDuringTheGame = nullptr;
 	
 	void CreateWidgetDuringTheGame();
 
@@ -27,4 +27,7 @@ public:
 	// Class UI widget
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widget During the game")
 	TSubclassOf<URADUIDuringTheGame_Base> widgetDuringTheGame_Class;
+
+	// Getter widget during the game
+	URADUIDuringTheGame_Base* GetWidgetDuringTheGame() const;
 };
