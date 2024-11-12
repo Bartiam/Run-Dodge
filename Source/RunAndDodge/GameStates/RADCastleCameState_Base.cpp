@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "../GameStates/RADCastleCameState_Base.h"
+#include "RADCastleCameState_Base.h"
 
 void ARADCastleCameState_Base::BeginPlay()
 {

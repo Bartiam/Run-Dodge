@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "../ActorComponents/StaminaComponent_Base.h"
+#include "StaminaComponent_Base.h"
 #include "../RADCharacters/RADCharacter_Base.h"
 
 #include "Kismet/GameplayStatics.h"

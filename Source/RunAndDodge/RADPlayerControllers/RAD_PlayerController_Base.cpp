@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "../RADPlayerControllers/RAD_PlayerController_Base.h"
+#include "RAD_PlayerController_Base.h"
 #include "../RADCharacters/RADCharacter_Base.h"
 #include "../HUDs/RADHUDCastle_Base.h"
 #include "../Widgets/RADUIDuringTheGame_Base.h"

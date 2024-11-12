@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "../GameModes/RADCastleGameMode_Base.h"
+#include "RADCastleGameMode_Base.h"
 #include "../GameInstances/RADGameInstance_Base.h"
 
 #include "GameFramework/GameUserSettings.h"

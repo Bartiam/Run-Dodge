@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "../Widgets/RADUIDuringTheGame_Base.h"
+#include "RADUIDuringTheGame_Base.h"
 #include "../RADCharacters/RADCharacter_Base.h"
 #include "../ActorComponents/HealthComponent_Base.h"
 #include "../ActorComponents/StaminaComponent_Base.h"
