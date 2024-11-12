@@ -14,9 +14,9 @@
 // Sets default values
 ACrossbow_Base::ACrossbow_Base()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
+
 	// Create scene component
 	rootSceneComponent = CreateDefaultSubobject<USceneComponent>(FName(TEXT("Root")));
 	SetRootComponent(rootSceneComponent);
@@ -58,7 +58,7 @@ void ACrossbow_Base::Tick(float DeltaTime)
 void ACrossbow_Base::SpawnBolt()
 {
 	FVector positionToSpawnBolt = FVector(spawnCollision->GetComponentLocation().X, spawnCollision->GetComponentLocation().Y, spawnCollision->GetComponentLocation().Z);
-	
+
 	bolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, FTransform(positionToSpawnBolt));
 	bolt->SetActorScale3D(scaleOfTheBolt);
 	bolt->SetActorRotation(crossbow->GetComponentRotation());
@@ -71,7 +71,7 @@ void ACrossbow_Base::HandleBeginOverlap(UPrimitiveComponent* overlappedComponent
 	if (otherActor->ActorHasTag(FName(TEXT("Player"))))
 	{
 		character = Cast<ARADCharacter_Base>(otherActor);
-		GetWorldTimerManager().SetTimer(timerToShoot, this, &ACrossbow_Base::ShootBolt, 0.1f, false);
+		GetWorldTimerManager().SetTimer(timerToShoot, this, &ACrossbow_Base::ShootBolt, timeBeforeShoot, false);
 	}
 }
 
@@ -86,7 +86,7 @@ void ACrossbow_Base::ShootBolt()
 {
 	bolt->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	bolt->bIsShoot = true;
-	GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, 1.f, false);
+	GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, timeToReload, false);
 }
 
 void ACrossbow_Base::ReloadCrossbow()

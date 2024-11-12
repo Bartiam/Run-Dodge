@@ -39,5 +39,5 @@ UCLASS()
 class RUNANDDODGE_API UMyTypes_Base : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
-	
+
 };

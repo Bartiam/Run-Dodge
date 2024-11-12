@@ -16,8 +16,8 @@ UCLASS()
 class RUNANDDODGE_API ACrossbow_Base : public AActor, public IInteractable
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	ACrossbow_Base();
 
@@ -58,6 +58,11 @@ public: // Public variables
 
 	UPROPERTY(BlueprintReadOnly)
 	ABolt_Base* bolt = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float timeBeforeShoot = 0.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float timeToReload = 0.f;
 
 private: // Private variables
 
