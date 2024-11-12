@@ -46,9 +46,6 @@ public: // Public variables
 	class USceneComponent* rootSceneComponent = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
-	bool bIsCharacterOverlapped = false;
-
-	UPROPERTY(BlueprintReadOnly)
 	class ARADCharacter_Base* character = nullptr;
 
 	UPROPERTY(EditAnywhere)
@@ -57,14 +54,14 @@ public: // Public variables
 	UPROPERTY(EditAnywhere)
 	float heightOfBolt = 0.f;
 
-private: // Private variables
-
-	FVector positionToSpawnBolt = FVector::Zero();
-
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	ABolt_Base* bolt = nullptr;
 
+private: // Private variables
+
 	FTimerHandle timerToReload;
+
+	FTimerHandle timerToShoot;
 
 public: // Public functions
 

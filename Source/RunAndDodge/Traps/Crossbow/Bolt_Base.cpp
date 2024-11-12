@@ -3,6 +3,8 @@
 
 #include "Bolt_Base.h"
 
+#include "Components/SceneComponent.h"
+
 // Sets default values
 ABolt_Base::ABolt_Base()
 {
@@ -11,7 +13,7 @@ ABolt_Base::ABolt_Base()
 
 	// Create bolt mesh
 	boltMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName(TEXT("Bolt")));
-	boltMesh->SetupAttachment(RootComponent);
+	SetRootComponent(boltMesh);
 }
 
 // Called when the game starts or when spawned
@@ -25,15 +27,15 @@ void ABolt_Base::BeginPlay()
 void ABolt_Base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	MovementBolt(DeltaTime);
+	if (bIsShoot)
+		MovementBolt(DeltaTime); 
 }
 
 void ABolt_Base::MovementBolt(float deltaTime)
 {
 	float timeSpeed = speedOfBolt * deltaTime;
 
-	FVector currentDirection = FVector(GetActorForwardVector().X * deltaTime, GetActorForwardVector().Y * deltaTime, GetActorForwardVector().Z * deltaTime);
+	FVector currentDirection = GetActorForwardVector() * timeSpeed;
 	AddActorWorldOffset(currentDirection, true);
 }
 

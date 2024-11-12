@@ -53,32 +53,35 @@ void ACrossbow_Base::Tick(float DeltaTime)
 
 void ACrossbow_Base::SpawnBolt()
 {
-	positionToSpawnBolt = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z - heightOfBolt);
-
-	auto newBolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, FTransform(positionToSpawnBolt));
-	newBolt->SetActorScale3D(scaleOfTheBolt);
-	newBolt->SetActorRelativeRotation(GetActorRotation());
+	FVector positionToSpawnBolt = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z - heightOfBolt);
+	
+	bolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, FTransform(positionToSpawnBolt));
+	bolt->SetActorScale3D(scaleOfTheBolt);
+	bolt->SetActorRotation(crossbow->GetComponentRotation());
 }
 
 void ACrossbow_Base::HandleBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor,
 	UPrimitiveComponent* otherComponent, int32 otherBodyIndex, bool bFromSweep, const FHitResult& sweepResult)
 {
-	character = Cast<ARADCharacter_Base>(otherActor);
-	//ShootBolt();
-	bIsCharacterOverlapped = true;
+	if (otherActor->ActorHasTag(FName(TEXT("Player"))))
+	{
+		character = Cast<ARADCharacter_Base>(otherActor);
+		GetWorldTimerManager().SetTimer(timerToShoot, this, &ACrossbow_Base::ShootBolt, 0.1f, false);
+	}
 }
 
 void ACrossbow_Base::HandleEndOverlap(UPrimitiveComponent* overlappedComponent,
 	AActor* otherActor, UPrimitiveComponent* otherComponent, int32 otherBodyIndex)
 {
-	character = nullptr;
-	bIsCharacterOverlapped = false;
+	if (otherActor->ActorHasTag(FName(TEXT("Player"))))
+		character = nullptr;
 }
 
 void ACrossbow_Base::ShootBolt()
 {
 	bolt->bIsShoot = true;
-	GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, 5.f, false);
+
+	GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, 1.f, false);
 }
 
 void ACrossbow_Base::ReloadCrossbow()

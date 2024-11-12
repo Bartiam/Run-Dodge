@@ -49,6 +49,8 @@ ARADCharacter_Base::ARADCharacter_Base()
 	healthComponent = CreateDefaultSubobject<UHealthComponent_Base>(FName("Health component"));
 	// Create stamina component
 	staminaComponent = CreateDefaultSubobject<UStaminaComponent_Base>(FName("Stamina component"));
+	// Set tag
+	Tags.Add(FName(TEXT("Player")));
 }
 
 // Called when the game starts or when spawned

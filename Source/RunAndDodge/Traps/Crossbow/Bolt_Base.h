@@ -36,11 +36,10 @@ public:
 	float damageOfBolt = 0.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Specifications of bolt")
-	float speedOfBolt = 0.f;
+	float speedOfBolt = 100.f;
 
 private:
 
 	UFUNCTION()
 	void MovementBolt(float deltaTime);
-
 };
