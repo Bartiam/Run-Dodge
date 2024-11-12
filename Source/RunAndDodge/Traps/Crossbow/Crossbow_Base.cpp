@@ -32,6 +32,10 @@ ACrossbow_Base::ACrossbow_Base()
 	LookingCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	LookingCollision->SetCollisionResponseToAllChannels(ECR_Overlap);
 	LookingCollision->SetupAttachment(RootComponent);
+
+	// Create spawn collision
+	spawnCollision = CreateDefaultSubobject<UBoxComponent>(FName(TEXT("Spawn collision")));
+	spawnCollision->SetupAttachment(crossbow);
 }
 
 // Called when the game starts or when spawned
@@ -53,11 +57,12 @@ void ACrossbow_Base::Tick(float DeltaTime)
 
 void ACrossbow_Base::SpawnBolt()
 {
-	FVector positionToSpawnBolt = FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z - heightOfBolt);
+	FVector positionToSpawnBolt = FVector(spawnCollision->GetComponentLocation().X, spawnCollision->GetComponentLocation().Y, spawnCollision->GetComponentLocation().Z);
 	
 	bolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, FTransform(positionToSpawnBolt));
 	bolt->SetActorScale3D(scaleOfTheBolt);
 	bolt->SetActorRotation(crossbow->GetComponentRotation());
+	bolt->AttachToComponent(crossbow, FAttachmentTransformRules::KeepWorldTransform);
 }
 
 void ACrossbow_Base::HandleBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor,
@@ -79,8 +84,8 @@ void ACrossbow_Base::HandleEndOverlap(UPrimitiveComponent* overlappedComponent,
 
 void ACrossbow_Base::ShootBolt()
 {
+	bolt->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	bolt->bIsShoot = true;
-
 	GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, 1.f, false);
 }
 

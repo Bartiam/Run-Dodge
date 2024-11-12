@@ -28,7 +28,7 @@ public:
 
 	// Static mesh component
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt mesh")
-	UStaticMeshComponent* boltMesh = nullptr;
+	class UStaticMeshComponent* boltMesh = nullptr;
 
 	bool bIsShoot = false;
 

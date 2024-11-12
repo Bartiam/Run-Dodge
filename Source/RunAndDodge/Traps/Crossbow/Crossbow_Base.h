@@ -10,6 +10,7 @@
 
 class UStaticMeshComponent;
 class ABolt_Base;
+class UBoxComponent;
 
 UCLASS()
 class RUNANDDODGE_API ACrossbow_Base : public AActor, public IInteractable
@@ -41,6 +42,10 @@ public: // Public variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Looking collision")
 	class UBoxComponent* LookingCollision = nullptr;
 
+	// Collision for spawn bolt
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawn collision")
+	UBoxComponent* spawnCollision = nullptr;
+
 	// Root component
 	UPROPERTY()
 	class USceneComponent* rootSceneComponent = nullptr;
@@ -49,10 +54,7 @@ public: // Public variables
 	class ARADCharacter_Base* character = nullptr;
 
 	UPROPERTY(EditAnywhere)
-	FVector scaleOfTheBolt = FVector::Zero();
-
-	UPROPERTY(EditAnywhere)
-	float heightOfBolt = 0.f;
+	FVector scaleOfTheBolt;
 
 	UPROPERTY(BlueprintReadOnly)
 	ABolt_Base* bolt = nullptr;
