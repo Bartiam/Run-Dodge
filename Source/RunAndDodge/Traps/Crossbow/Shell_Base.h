@@ -7,16 +7,16 @@
 #include "../../FunctionLib/MyTypes_Base.h"
 #include "../../Interfaces/IInteractable.h"
 
-#include "Bolt_Base.generated.h"
+#include "Shell_Base.generated.h"
 
 UCLASS()
-class RUNANDDODGE_API ABolt_Base : public AActor, public IInteractable
+class RUNANDDODGE_API AShell_Base : public AActor, public IInteractable
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	ABolt_Base();
+	AShell_Base();
 
 protected:
 	// Called when the game starts or when spawned
@@ -29,15 +29,15 @@ public:
 public: // Public functions 
 
 	// Static mesh component
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt mesh")
-	class UStaticMeshComponent* boltMesh = nullptr;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shell mesh")
+	class UStaticMeshComponent* shellMesh = nullptr;
 
 	bool bIsShoot = false;
 	
-	FBoltSpecification boltSettings;
+	FShellSpecification shellSettings;
 
 	UFUNCTION()
-	void InitBoltSettings(const FBoltSpecification& boltInfo);
+	void InitBoltSettings(const FShellSpecification& shellInfo);
 
 	virtual void InteractBolt(AActor* interactor) override;
 

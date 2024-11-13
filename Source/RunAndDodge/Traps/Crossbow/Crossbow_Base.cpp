@@ -2,7 +2,7 @@
 
 
 #include "Crossbow_Base.h"
-#include "Bolt_Base.h"
+#include "Shell_Base.h"
 #include "../../RADCharacters/RADCharacter_Base.h"
 #include "../../GameModes/RADCastleGameMode_Base.h"
 
@@ -49,7 +49,7 @@ void ACrossbow_Base::BeginPlay()
 	LookingCollision->OnComponentEndOverlap.AddDynamic(this, &ACrossbow_Base::HandleEndOverlap);
 
 	currentGameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
-	currentGameMode->boltClass = crossbowSettings.boltClass;
+	currentGameMode->shellClass = crossbowSettings.shellClass;
 
 	SpawnBolt();
 }
@@ -64,8 +64,8 @@ void ACrossbow_Base::SpawnBolt()
 {
 	FVector positionToSpawnBolt = FVector(spawnCollision->GetComponentLocation().X, spawnCollision->GetComponentLocation().Y, spawnCollision->GetComponentLocation().Z);
 
-	bolt = GetWorld()->SpawnActor<ABolt_Base>(crossbowSettings.boltClass, FTransform(positionToSpawnBolt));
-	bolt->InitBoltSettings(crossbowSettings.boltSettings);
+	bolt = GetWorld()->SpawnActor<AShell_Base>(crossbowSettings.shellClass, FTransform(positionToSpawnBolt));
+	bolt->InitBoltSettings(crossbowSettings.shellSettings);
 	bolt->SetActorRotation(crossbow->GetComponentRotation());
 	bolt->AttachToComponent(crossbow, FAttachmentTransformRules::KeepWorldTransform);
 }

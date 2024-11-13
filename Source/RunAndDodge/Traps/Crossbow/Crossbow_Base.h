@@ -9,7 +9,7 @@
 #include "Crossbow_Base.generated.h"
 
 class UStaticMeshComponent;
-class ABolt_Base;
+class AShell_Base;
 class UBoxComponent;
 
 UCLASS()
@@ -50,7 +50,7 @@ public: // Public variables
 	class ARADCharacter_Base* character = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
-	ABolt_Base* bolt = nullptr;
+	AShell_Base* bolt = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
 	FCrossbowSpecification crossbowSettings;
