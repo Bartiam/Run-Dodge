@@ -5,4 +5,4 @@
 
 // Add default functionality here for any IIInteractable functions that are not pure virtual.
 
-void IInteractable::Interact(const AActor* interactor) {}
+void IInteractable::Interact(AActor* interactor) {}

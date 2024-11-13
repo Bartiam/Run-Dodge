@@ -5,11 +5,12 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "../../FunctionLib/MyTypes_Base.h"
+#include "../../Interfaces/IInteractable.h"
 
 #include "Bolt_Base.generated.h"
 
 UCLASS()
-class RUNANDDODGE_API ABolt_Base : public AActor
+class RUNANDDODGE_API ABolt_Base : public AActor, public IInteractable
 {
 	GENERATED_BODY()
 
@@ -25,6 +26,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+public: // Public functions 
+
 	// Static mesh component
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt mesh")
 	class UStaticMeshComponent* boltMesh = nullptr;
@@ -36,12 +39,17 @@ public:
 	UFUNCTION()
 	void InitBoltSettings(const FBoltSpecification& boltInfo);
 
-private:
+private: // Private functions
 
 	UFUNCTION()
 	void MovementBolt(float deltaTime);
 
 	UFUNCTION()
-	void ComponentHitEvent(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
+	void ComponentHit(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
 		UPrimitiveComponent* otherHitComponent, FVector normalImpuls, const FHitResult& hitResult);
+
+private: // Private variables
+
+	UPROPERTY()
+	class ARADCastleGameMode_Base* currentGameMode = nullptr;
 };

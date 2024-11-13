@@ -49,8 +49,6 @@ struct FBoltSpecification
 	float boltSpeed = 0.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt settings")
 	FVector boltScale;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt settings")
-	float boltLifeTime = 0.f;
 };
 
 // Structure for crossbow settings

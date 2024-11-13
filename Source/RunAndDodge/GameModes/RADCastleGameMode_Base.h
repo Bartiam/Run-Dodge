@@ -6,9 +6,6 @@
 #include "GameFramework/GameModeBase.h"
 #include "RADCastleGameMode_Base.generated.h"
 
-class URADGameInstance_Base;
-class UGameUserSettings;
-
 UCLASS()
 class RUNANDDODGE_API ARADCastleGameMode_Base : public AGameModeBase
 {
@@ -16,5 +13,19 @@ class RUNANDDODGE_API ARADCastleGameMode_Base : public AGameModeBase
 	
 protected:
 	virtual void BeginPlay() override;
+
+public: // Public variables
+
+	// Bolt which swapn in objects
+	TSubclassOf<class ABolt_Base> boltClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Lifetime objects")
+	float lifeSpanObjects = 0.f;
+
+public: // Public functions
+
+	// Spawn bolt in object
+	UFUNCTION()
+	void SpawnObjectInObject(const AActor* hitActor);
 
 };

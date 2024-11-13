@@ -4,12 +4,14 @@
 #include "Crossbow_Base.h"
 #include "Bolt_Base.h"
 #include "../../RADCharacters/RADCharacter_Base.h"
+#include "../../GameModes/RADCastleGameMode_Base.h"
 
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/SceneComponent.h"
 
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ACrossbow_Base::ACrossbow_Base()
@@ -45,6 +47,9 @@ void ACrossbow_Base::BeginPlay()
 
 	LookingCollision->OnComponentBeginOverlap.AddDynamic(this, &ACrossbow_Base::HandleBeginOverlap);
 	LookingCollision->OnComponentEndOverlap.AddDynamic(this, &ACrossbow_Base::HandleEndOverlap);
+
+	currentGameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
+	currentGameMode->boltClass = crossbowSettings.boltClass;
 
 	SpawnBolt();
 }

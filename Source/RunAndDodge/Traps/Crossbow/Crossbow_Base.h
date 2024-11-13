@@ -61,6 +61,8 @@ private: // Private variables
 
 	FTimerHandle timerToShoot;
 
+	class ARADCastleGameMode_Base* currentGameMode = nullptr;
+
 public: // Public functions
 
 	UFUNCTION()

@@ -23,5 +23,5 @@ class RUNANDDODGE_API IInteractable
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	// Triggered when colliding with a character
-	virtual void Interact(const AActor* interactor);
+	virtual void Interact(AActor* interactor);
 };

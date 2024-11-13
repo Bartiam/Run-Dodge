@@ -2,8 +2,10 @@
 
 
 #include "Bolt_Base.h"
-
 #include "Components/BoxComponent.h"
+#include "../../GameModes/RADCastleGameMode_Base.h"
+
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABolt_Base::ABolt_Base()
@@ -21,7 +23,8 @@ ABolt_Base::ABolt_Base()
 void ABolt_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	boltMesh->OnComponentHit.AddDynamic(this, &ABolt_Base::ComponentHitEvent);
+
+	currentGameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
 }
 
 // Called every frame
@@ -36,6 +39,7 @@ void ABolt_Base::InitBoltSettings(const FBoltSpecification& boltInfo)
 {
 	boltSettings = boltInfo;
 	SetActorScale3D(boltSettings.boltScale);
+	boltMesh->OnComponentHit.AddDynamic(this, &ABolt_Base::ComponentHit);
 }
 
 void ABolt_Base::MovementBolt(float deltaTime)
@@ -46,10 +50,13 @@ void ABolt_Base::MovementBolt(float deltaTime)
 	AddActorWorldOffset(currentDirection, true);
 }
 
-void ABolt_Base::ComponentHitEvent(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
+void ABolt_Base::ComponentHit(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
 	UPrimitiveComponent* otherHitComponent, FVector normalImpuls, const FHitResult& hitResult)
 {
+	currentGameMode->SpawnObjectInObject(this);
+
 	
-	
+
+	Destroy();
 }
 
