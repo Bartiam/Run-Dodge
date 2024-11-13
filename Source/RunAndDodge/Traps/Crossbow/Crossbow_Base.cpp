@@ -59,8 +59,8 @@ void ACrossbow_Base::SpawnBolt()
 {
 	FVector positionToSpawnBolt = FVector(spawnCollision->GetComponentLocation().X, spawnCollision->GetComponentLocation().Y, spawnCollision->GetComponentLocation().Z);
 
-	bolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, FTransform(positionToSpawnBolt));
-	bolt->SetActorScale3D(scaleOfTheBolt);
+	bolt = GetWorld()->SpawnActor<ABolt_Base>(crossbowSettings.boltClass, FTransform(positionToSpawnBolt));
+	bolt->InitBoltSettings(crossbowSettings.boltSettings);
 	bolt->SetActorRotation(crossbow->GetComponentRotation());
 	bolt->AttachToComponent(crossbow, FAttachmentTransformRules::KeepWorldTransform);
 }
@@ -71,7 +71,7 @@ void ACrossbow_Base::HandleBeginOverlap(UPrimitiveComponent* overlappedComponent
 	if (otherActor->ActorHasTag(FName(TEXT("Player"))))
 	{
 		character = Cast<ARADCharacter_Base>(otherActor);
-		GetWorldTimerManager().SetTimer(timerToShoot, this, &ACrossbow_Base::ShootBolt, timeBeforeShoot, false);
+		GetWorldTimerManager().SetTimer(timerToShoot, this, &ACrossbow_Base::ShootBolt, crossbowSettings.timeBeforeShoot, false);
 	}
 }
 
@@ -86,7 +86,7 @@ void ACrossbow_Base::ShootBolt()
 {
 	bolt->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	bolt->bIsShoot = true;
-	GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, timeToReload, false);
+	GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, crossbowSettings.timeReload, false);
 }
 
 void ACrossbow_Base::ReloadCrossbow()

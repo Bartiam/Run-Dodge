@@ -4,8 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-
-#include "../../Interfaces/IInteractable.h"
+#include "../../FunctionLib/MyTypes_Base.h"
 
 #include "Bolt_Base.generated.h"
 
@@ -31,15 +30,18 @@ public:
 	class UStaticMeshComponent* boltMesh = nullptr;
 
 	bool bIsShoot = false;
+	
+	FBoltSpecification boltSettings;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Specifications of bolt")
-	float damageOfBolt = 0.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Specifications of bolt")
-	float speedOfBolt = 100.f;
+	UFUNCTION()
+	void InitBoltSettings(const FBoltSpecification& boltInfo);
 
 private:
 
 	UFUNCTION()
 	void MovementBolt(float deltaTime);
+
+	UFUNCTION()
+	void ComponentHitEvent(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
+		UPrimitiveComponent* otherHitComponent, FVector normalImpuls, const FHitResult& hitResult);
 };

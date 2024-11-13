@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "../../Interfaces/IInteractable.h"
+#include "../../FunctionLib/MyTypes_Base.h"
 
 #include "Crossbow_Base.generated.h"
 
@@ -13,7 +13,7 @@ class ABolt_Base;
 class UBoxComponent;
 
 UCLASS()
-class RUNANDDODGE_API ACrossbow_Base : public AActor, public IInteractable
+class RUNANDDODGE_API ACrossbow_Base : public AActor
 {
 	GENERATED_BODY()
 
@@ -29,10 +29,6 @@ public: // Public variables
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	// crossbow bolt
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt")
-	TSubclassOf<ABolt_Base> boltClass;
 
 	// crossbow mesh
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Crossbow")
@@ -53,16 +49,11 @@ public: // Public variables
 	UPROPERTY(BlueprintReadOnly)
 	class ARADCharacter_Base* character = nullptr;
 
-	UPROPERTY(EditAnywhere)
-	FVector scaleOfTheBolt;
-
 	UPROPERTY(BlueprintReadOnly)
 	ABolt_Base* bolt = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	float timeBeforeShoot = 0.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	float timeToReload = 0.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
+	FCrossbowSpecification crossbowSettings;
 
 private: // Private variables
 
