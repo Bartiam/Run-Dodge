@@ -17,6 +17,8 @@ ABolt_Base::ABolt_Base()
 	boltMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName(TEXT("Bolt")));
 	SetRootComponent(boltMesh);
 	boltMesh->SetCollisionProfileName(FName(TEXT("BlockAll")));
+	// Add tag
+	Tags.Add(FName(TEXT("Bolt")));
 }
 
 // Called when the game starts or when spawned
@@ -42,6 +44,11 @@ void ABolt_Base::InitBoltSettings(const FBoltSpecification& boltInfo)
 	boltMesh->OnComponentHit.AddDynamic(this, &ABolt_Base::ComponentHit);
 }
 
+void ABolt_Base::InteractBolt(AActor* interactor)
+{
+
+}
+
 void ABolt_Base::MovementBolt(float deltaTime)
 {
 	float timeSpeed = boltSettings.boltSpeed * deltaTime;
@@ -53,10 +60,12 @@ void ABolt_Base::MovementBolt(float deltaTime)
 void ABolt_Base::ComponentHit(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
 	UPrimitiveComponent* otherHitComponent, FVector normalImpuls, const FHitResult& hitResult)
 {
-	currentGameMode->SpawnObjectInObject(this);
+	currentGameMode->SpawnObjectInObject(this, otherActorHit);
 
-	
-
-	Destroy();
+	if (otherActorHit->ActorHasTag(FName(TEXT("Player"))))
+	{
+		auto interactInterface = Cast<IInteractable>(otherActorHit);
+		interactInterface->InteractBolt(otherActorHit);
+	}
 }
 

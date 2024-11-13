@@ -24,8 +24,8 @@ public: // Public variables
 
 public: // Public functions
 
-	// Spawn bolt in object
+	// Spawn object in object
 	UFUNCTION()
-	void SpawnObjectInObject(const AActor* hitActor);
+	void SpawnObjectInObject(AActor* hitActor, AActor* otherHitActor);
 
 };

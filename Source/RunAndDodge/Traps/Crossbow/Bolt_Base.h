@@ -39,6 +39,8 @@ public: // Public functions
 	UFUNCTION()
 	void InitBoltSettings(const FBoltSpecification& boltInfo);
 
+	virtual void InteractBolt(AActor* interactor) override;
+
 private: // Private functions
 
 	UFUNCTION()

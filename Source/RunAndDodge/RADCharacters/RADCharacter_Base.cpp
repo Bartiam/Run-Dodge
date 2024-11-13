@@ -151,3 +151,8 @@ void ARADCharacter_Base::CharacterJumping()
 	}
 }
 
+void ARADCharacter_Base::InteractBolt(AActor* interactor)
+{
+
+}
+

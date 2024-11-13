@@ -4,6 +4,7 @@
 #include "RADCastleGameMode_Base.h"
 #include "../GameInstances/RADGameInstance_Base.h"
 #include "../Traps/Crossbow/Bolt_Base.h"
+#include "../RADCharacters/RADCharacter_Base.h"
 
 #include "GameFramework/GameUserSettings.h"
 
@@ -12,10 +13,36 @@ void ARADCastleGameMode_Base::BeginPlay()
 	Super::BeginPlay();
 }
 
-void ARADCastleGameMode_Base::SpawnObjectInObject(const AActor* hitActor)
+void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* otherHitActor)
 {
-	auto collideObject = Cast<ABolt_Base>(hitActor);
+	// If two bolts collide
+	if (otherHitActor->ActorHasTag(FName(TEXT("Bolt"))))
+	{
+		auto firstBolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, hitActor->GetTransform());
+		auto secondBolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, hitActor->GetTransform());
 
-	auto boltInObject = GetWorld()->SpawnActor<ABolt_Base>(boltClass, collideObject->GetTransform());
-	boltInObject->SetLifeSpan(lifeSpanObjects);
+		firstBolt->SetLifeSpan(lifeSpanObjects);
+		secondBolt->SetLifeSpan(lifeSpanObjects);
+
+		firstBolt->boltMesh->SetSimulatePhysics(true);
+		secondBolt->boltMesh->SetSimulatePhysics(true);
+
+		hitActor->Destroy();
+		otherHitActor->Destroy();
+	}
+	// Collision with the world
+	else
+	{
+		auto boltInObject = GetWorld()->SpawnActor<ABolt_Base>(boltClass, hitActor->GetTransform());
+		boltInObject->SetLifeSpan(lifeSpanObjects);
+		boltInObject->boltMesh->SetCollisionProfileName(FName(TEXT("NoCollision")));
+
+		// Collision with a character
+		if (otherHitActor->ActorHasTag(FName(TEXT("Player"))))
+		{
+			boltInObject->AttachToActor(otherHitActor, FAttachmentTransformRules::KeepWorldTransform);
+		}
+
+		hitActor->Destroy();
+	}
 }
