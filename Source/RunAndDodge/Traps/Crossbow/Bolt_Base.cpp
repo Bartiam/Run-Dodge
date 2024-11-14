@@ -1,29 +1,30 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Shell_Base.h"
+#include "Bolt_Base.h"
 #include "Components/BoxComponent.h"
+
 #include "../../GameModes/RADCastleGameMode_Base.h"
 #include "../../Interfaces/IInteractable.h"
 
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
-AShell_Base::AShell_Base()
+ABolt_Base::ABolt_Base()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Create bolt mesh
-	shellMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName(TEXT("Shell")));
-	SetRootComponent(shellMesh);
-	shellMesh->SetCollisionProfileName(FName(TEXT("BlockAll")));
+	boltMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName(TEXT("Bolt")));
+	SetRootComponent(boltMesh);
+	boltMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 	// Add tag
-	Tags.Add(FName(TEXT("Shell")));
+	Tags.Add(FName(TEXT("Bolt")));
 }
 
 // Called when the game starts or when spawned
-void AShell_Base::BeginPlay()
+void ABolt_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -31,31 +32,36 @@ void AShell_Base::BeginPlay()
 }
 
 // Called every frame
-void AShell_Base::Tick(float DeltaTime)
+void ABolt_Base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if (bIsShoot)
 		MovementBolt(DeltaTime);
 }
 
-void AShell_Base::InitBoltSettings(const FShellSpecification& shellInfo)
+void ABolt_Base::InitBoltSettings(const FBoltSpecification& boltInfo)
 {
-	shellSettings = shellInfo;
-	SetActorScale3D(shellSettings.shellScale);
-	shellMesh->OnComponentHit.AddDynamic(this, &AShell_Base::ComponentHit);
+	boltSettings = boltInfo;
+	SetActorScale3D(boltSettings.boltScale);
+	boltMesh->OnComponentHit.AddDynamic(this, &ABolt_Base::ComponentHit);
 }
 
-void AShell_Base::MovementBolt(float deltaTime)
+void ABolt_Base::MovementBolt(float deltaTime)
 {
-	float timeSpeed = shellSettings.shellSpeed * deltaTime;
+	float timeSpeed = boltSettings.boltSpeed * deltaTime;
 
 	FVector currentDirection = GetActorForwardVector() * timeSpeed;
 	AddActorWorldOffset(currentDirection, true);
 }
 
-void AShell_Base::ComponentHit(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
+void ABolt_Base::ComponentHit(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
 	UPrimitiveComponent* otherHitComponent, FVector normalImpuls, const FHitResult& hitResult)
 {
 	currentGameMode->SpawnObjectInObject(this, otherActorHit);
+
+	if (otherActorHit->ActorHasTag(FName(TEXT("Player"))))
+	{
+		
+	}
 }
 

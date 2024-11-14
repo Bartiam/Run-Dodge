@@ -4,7 +4,7 @@
 #include "RADCharacter_Base.h"
 #include "../ActorComponents/HealthComponent_Base.h"
 #include "../ActorComponents/StaminaComponent_Base.h"
-#include "../Traps/Crossbow/Shell_Base.h"
+#include "../Traps/Crossbow/Bolt_Base.h"
 
 #include "Camera/CameraComponent.h"
 
@@ -152,8 +152,7 @@ void ARADCharacter_Base::CharacterJumping()
 	}
 }
 
-void ARADCharacter_Base::Interact(AActor* interactor, const float& damage)
+void ARADCharacter_Base::Interact(AActor* interactor)
 {
-	
-}
 
+}

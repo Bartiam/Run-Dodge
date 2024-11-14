@@ -91,5 +91,5 @@ public: // Public functions
 	UFUNCTION()
 	void CharacterJumping();
 
-	virtual void Interact(AActor* interactor, const float& damage) override;
+	virtual void Interact(AActor* interactor) override;
 };

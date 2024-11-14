@@ -2,7 +2,7 @@
 
 
 #include "Crossbow_Base.h"
-#include "Shell_Base.h"
+#include "Bolt_Base.h"
 #include "../../RADCharacters/RADCharacter_Base.h"
 #include "../../GameModes/RADCastleGameMode_Base.h"
 
@@ -26,7 +26,7 @@ ACrossbow_Base::ACrossbow_Base()
 	// Create crossbow
 	crossbow = CreateDefaultSubobject<UStaticMeshComponent>(FName(TEXT("Crossbow")));
 	// Disable collision
-	crossbow->SetCollisionProfileName(FName(TEXT("NoCollision")));
+	//crossbow->SetCollisionProfileName(FName(TEXT("NoCollision")));
 	crossbow->SetupAttachment(RootComponent);
 
 	// Create looking collision
@@ -49,7 +49,7 @@ void ACrossbow_Base::BeginPlay()
 	LookingCollision->OnComponentEndOverlap.AddDynamic(this, &ACrossbow_Base::HandleEndOverlap);
 
 	currentGameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
-	currentGameMode->shellClass = crossbowSettings.shellClass;
+	currentGameMode->boltClass = crossbowSettings.boltClass;
 
 	SpawnBolt();
 }
@@ -64,8 +64,8 @@ void ACrossbow_Base::SpawnBolt()
 {
 	FVector positionToSpawnBolt = FVector(spawnCollision->GetComponentLocation().X, spawnCollision->GetComponentLocation().Y, spawnCollision->GetComponentLocation().Z);
 
-	bolt = GetWorld()->SpawnActor<AShell_Base>(crossbowSettings.shellClass, FTransform(positionToSpawnBolt));
-	bolt->InitBoltSettings(crossbowSettings.shellSettings);
+	bolt = GetWorld()->SpawnActor<ABolt_Base>(crossbowSettings.boltClass, FTransform(positionToSpawnBolt));
+	bolt->InitBoltSettings(crossbowSettings.boltSettings);
 	bolt->SetActorRotation(crossbow->GetComponentRotation());
 	bolt->AttachToComponent(crossbow, FAttachmentTransformRules::KeepWorldTransform);
 }
@@ -75,7 +75,7 @@ void ACrossbow_Base::HandleBeginOverlap(UPrimitiveComponent* overlappedComponent
 {
 	if (otherActor->ActorHasTag(FName(TEXT("Player"))))
 	{
-		character = Cast<ARADCharacter_Base>(otherActor);
+		character = otherActor;
 		GetWorldTimerManager().SetTimer(timerToShoot, this, &ACrossbow_Base::ShootBolt, crossbowSettings.timeBeforeShoot, false);
 	}
 }
@@ -97,4 +97,9 @@ void ACrossbow_Base::ShootBolt()
 void ACrossbow_Base::ReloadCrossbow()
 {
 	SpawnBolt();
+
+	if (character)
+	{
+		ShootBolt();
+	}
 }

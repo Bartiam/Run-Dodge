@@ -3,7 +3,7 @@
 
 #include "RADCastleGameMode_Base.h"
 #include "../GameInstances/RADGameInstance_Base.h"
-#include "../Traps/Crossbow/Shell_Base.h"
+#include "../Traps/Crossbow/Bolt_Base.h"
 #include "../RADCharacters/RADCharacter_Base.h"
 
 #include "GameFramework/GameUserSettings.h"
@@ -16,16 +16,19 @@ void ARADCastleGameMode_Base::BeginPlay()
 void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* otherHitActor)
 {
 	// If two bolts collide
-	if (otherHitActor->ActorHasTag(FName(TEXT("Shell"))))
+	if (otherHitActor->ActorHasTag(FName(TEXT("Bolt"))))
 	{
-		auto firstBolt = GetWorld()->SpawnActor<AShell_Base>(shellClass, hitActor->GetTransform());
-		auto secondBolt = GetWorld()->SpawnActor<AShell_Base>(shellClass, hitActor->GetTransform());
+		auto firstBolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, hitActor->GetTransform());
+		auto secondBolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, hitActor->GetTransform());
 
 		firstBolt->SetLifeSpan(lifeSpanObjects);
 		secondBolt->SetLifeSpan(lifeSpanObjects);
 
-		firstBolt->shellMesh->SetSimulatePhysics(true);
-		secondBolt->shellMesh->SetSimulatePhysics(true);
+		firstBolt->boltMesh->SetSimulatePhysics(true);
+		secondBolt->boltMesh->SetSimulatePhysics(true);
+
+		firstBolt->boltMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
+		secondBolt->boltMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 
 		hitActor->Destroy();
 		otherHitActor->Destroy();
@@ -33,9 +36,9 @@ void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* othe
 	// Collision with the world
 	else
 	{
-		auto boltInObject = GetWorld()->SpawnActor<AShell_Base>(shellClass, hitActor->GetTransform());
+		auto boltInObject = GetWorld()->SpawnActor<ABolt_Base>(boltClass, hitActor->GetTransform());
 		boltInObject->SetLifeSpan(lifeSpanObjects);
-		boltInObject->shellMesh->SetCollisionProfileName(FName(TEXT("NoCollision")));
+		boltInObject->boltMesh->SetCollisionProfileName(FName(TEXT("NoCollision")));
 
 		// Collision with a character
 		if (otherHitActor->ActorHasTag(FName(TEXT("Player"))))

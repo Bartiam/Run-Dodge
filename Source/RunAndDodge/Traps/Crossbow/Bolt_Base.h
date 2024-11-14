@@ -6,16 +6,16 @@
 #include "GameFramework/Actor.h"
 #include "../../FunctionLib/MyTypes_Base.h"
 
-#include "Shell_Base.generated.h"
+#include "Bolt_Base.generated.h"
 
 UCLASS()
-class RUNANDDODGE_API AShell_Base : public AActor
+class RUNANDDODGE_API ABolt_Base : public AActor
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	AShell_Base();
+	ABolt_Base();
 
 protected:
 	// Called when the game starts or when spawned
@@ -29,14 +29,14 @@ public: // Public functions
 
 	// Static mesh component
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shell mesh")
-	class UStaticMeshComponent* shellMesh = nullptr;
+	class UStaticMeshComponent* boltMesh = nullptr;
 
 	bool bIsShoot = false;
 	
-	FShellSpecification shellSettings;
+	FBoltSpecification boltSettings;
 
 	UFUNCTION()
-	void InitBoltSettings(const FShellSpecification& shellInfo);
+	void InitBoltSettings(const FBoltSpecification& boltlInfo);
 
 private: // Private functions
 

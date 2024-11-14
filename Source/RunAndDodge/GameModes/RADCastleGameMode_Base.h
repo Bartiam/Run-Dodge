@@ -17,8 +17,9 @@ protected:
 public: // Public variables
 
 	// Bolt which swapn in objects
-	TSubclassOf<class AShell_Base> shellClass;
+	TSubclassOf<class ABolt_Base> boltClass;
 
+	// The life of objects in the world
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Lifetime objects")
 	float lifeSpanObjects = 0.f;
 

@@ -9,7 +9,7 @@
 #include "Crossbow_Base.generated.h"
 
 class UStaticMeshComponent;
-class AShell_Base;
+class ABolt_Base;
 class UBoxComponent;
 
 UCLASS()
@@ -47,10 +47,10 @@ public: // Public variables
 	class USceneComponent* rootSceneComponent = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
-	class ARADCharacter_Base* character = nullptr;
+	AActor* character = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
-	AShell_Base* bolt = nullptr;
+	ABolt_Base* bolt = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
 	FCrossbowSpecification crossbowSettings;

@@ -6,7 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "MyTypes_Base.generated.h"
 
-class AShell_Base;
+class ABolt_Base;
 
 // State machine for movement character
 UENUM(BlueprintType)
@@ -39,16 +39,16 @@ struct FCharacterSpeed
 
 // Structure for bolt settings
 USTRUCT(BlueprintType)
-struct FShellSpecification
+struct FBoltSpecification
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt settings")
-	float shellDamage = 0.f;
+	float boltDamage = 0.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt settings")
-	float shellSpeed = 0.f;
+	float boltSpeed = 0.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt settings")
-	FVector shellScale;
+	FVector boltScale;
 };
 
 // Structure for crossbow settings
@@ -62,9 +62,9 @@ struct FCrossbowSpecification
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
 	float timeReload = 0.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
-	TSubclassOf<AShell_Base> shellClass;
+	TSubclassOf<ABolt_Base> boltClass;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
-	FShellSpecification shellSettings;
+	FBoltSpecification boltSettings;
 };
 
 UCLASS()
