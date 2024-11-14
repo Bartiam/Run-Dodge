@@ -42,3 +42,13 @@ float UHealthComponent_Base::GetCurrentHealth() const
 	return currentHealth;
 }
 
+void UHealthComponent_Base::TakeDamageHealth(const float& damage)
+{
+
+}
+
+void UHealthComponent_Base::HealthRegeneration()
+{
+
+}
+

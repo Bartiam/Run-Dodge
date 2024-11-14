@@ -5,12 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "../../FunctionLib/MyTypes_Base.h"
-#include "../../Interfaces/IInteractable.h"
 
 #include "Shell_Base.generated.h"
 
 UCLASS()
-class RUNANDDODGE_API AShell_Base : public AActor, public IInteractable
+class RUNANDDODGE_API AShell_Base : public AActor
 {
 	GENERATED_BODY()
 
@@ -38,8 +37,6 @@ public: // Public functions
 
 	UFUNCTION()
 	void InitBoltSettings(const FShellSpecification& shellInfo);
-
-	virtual void InteractBolt(AActor* interactor) override;
 
 private: // Private functions
 

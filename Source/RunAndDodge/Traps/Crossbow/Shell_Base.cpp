@@ -4,6 +4,7 @@
 #include "Shell_Base.h"
 #include "Components/BoxComponent.h"
 #include "../../GameModes/RADCastleGameMode_Base.h"
+#include "../../Interfaces/IInteractable.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -44,11 +45,6 @@ void AShell_Base::InitBoltSettings(const FShellSpecification& shellInfo)
 	shellMesh->OnComponentHit.AddDynamic(this, &AShell_Base::ComponentHit);
 }
 
-void AShell_Base::InteractBolt(AActor* interactor)
-{
-
-}
-
 void AShell_Base::MovementBolt(float deltaTime)
 {
 	float timeSpeed = shellSettings.shellSpeed * deltaTime;
@@ -61,11 +57,5 @@ void AShell_Base::ComponentHit(UPrimitiveComponent* hitComponent, AActor* otherA
 	UPrimitiveComponent* otherHitComponent, FVector normalImpuls, const FHitResult& hitResult)
 {
 	currentGameMode->SpawnObjectInObject(this, otherActorHit);
-
-	if (otherActorHit->ActorHasTag(FName(TEXT("Player"))))
-	{
-		auto interactInterface = Cast<IInteractable>(otherActorHit);
-		interactInterface->InteractBolt(otherActorHit);
-	}
 }
 

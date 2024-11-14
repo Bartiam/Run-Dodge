@@ -28,8 +28,9 @@ public:
 
 private:
 	// Private variable for this actor component
-	UPROPERTY()
 	float currentHealth = 0.f;
+
+	FTimerHandle timerForBeginRegeneration;
 
 public: // Getters and setters for this actor component
 
@@ -38,5 +39,11 @@ public: // Getters and setters for this actor component
 	void SetCurrentHealth(const float& newHealth);
 	UFUNCTION()
 	float GetCurrentHealth() const;
-		
+
+public: // Public functions
+
+	UFUNCTION()
+	void TakeDamageHealth(const float& damage);
+	UFUNCTION()
+	void HealthRegeneration();
 };
