@@ -20,7 +20,7 @@ void UHealthComponent_Base::BeginPlay()
 	Super::BeginPlay();
 
 	currentHealth = defaultHealth;
-	
+	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent_Base::TakeDamageHealth);
 }
 
 
@@ -29,7 +29,11 @@ void UHealthComponent_Base::TickComponent(float DeltaTime, ELevelTick TickType, 
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	if (bIsCanRegeneration)
+	{
+		HealthRegeneration();
+		NumberWhichHealthDecrease = DeltaTime * increaseHealth;
+	}
 }
 
 void UHealthComponent_Base::SetCurrentHealth(const float& newHealth)
@@ -42,13 +46,25 @@ float UHealthComponent_Base::GetCurrentHealth() const
 	return currentHealth;
 }
 
-void UHealthComponent_Base::TakeDamageHealth(const float& damage)
+void UHealthComponent_Base::TakeDamageHealth(AActor* damageActor, float damage, const UDamageType* damageType, AController* instigateBy, AActor* damageCauser)
 {
-
+	GetWorld()->GetTimerManager().ClearTimer(timerForBeginRegeneration);
+	bIsCanRegeneration = false;
+	currentHealth -= damage;
+	GetWorld()->GetTimerManager().SetTimer(timerForBeginRegeneration, this, &UHealthComponent_Base::ChangeCanRegenerationHealth, timeToStartRegeneration, false);
 }
 
 void UHealthComponent_Base::HealthRegeneration()
 {
+	currentHealth += NumberWhichHealthDecrease;
 
+	if (currentHealth >= defaultHealth)
+	{
+		currentHealth = defaultHealth;
+		bIsCanRegeneration = false;
+		return;
+	}
 }
 
+void UHealthComponent_Base::ChangeCanRegenerationHealth()
+{ bIsCanRegeneration = true; }

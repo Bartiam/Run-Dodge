@@ -25,6 +25,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+public: // Public variables
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Type Damage")
+	TSubclassOf<UDamageType> damageTypeClass;
+
 public: // Public functions 
 
 	// Static mesh component

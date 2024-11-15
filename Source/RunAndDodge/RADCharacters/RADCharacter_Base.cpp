@@ -58,7 +58,6 @@ ARADCharacter_Base::ARADCharacter_Base()
 void ARADCharacter_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -150,9 +149,4 @@ void ARADCharacter_Base::CharacterJumping()
 		bIsCharacterJump = true;
 		staminaComponent->ReduseStaminaJump();
 	}
-}
-
-void ARADCharacter_Base::Interact(AActor* interactor)
-{
-
 }

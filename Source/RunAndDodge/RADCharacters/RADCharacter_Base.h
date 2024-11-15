@@ -6,7 +6,6 @@
 #include "GameFramework/Character.h"
 
 #include "../FunctionLib/MyTypes_Base.h"
-#include "../Interfaces/IInteractable.h"
 
 #include "RADCharacter_Base.generated.h"
 
@@ -15,7 +14,7 @@ class UStaminaComponent_Base;
 class UAnimMontage;
 
 UCLASS()
-class RUNANDDODGE_API ARADCharacter_Base : public ACharacter, public IInteractable
+class RUNANDDODGE_API ARADCharacter_Base : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -90,6 +89,4 @@ public: // Public functions
 
 	UFUNCTION()
 	void CharacterJumping();
-
-	virtual void Interact(AActor* interactor) override;
 };

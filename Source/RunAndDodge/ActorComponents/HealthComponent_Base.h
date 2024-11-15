@@ -14,9 +14,6 @@ class RUNANDDODGE_API UHealthComponent_Base : public UActorComponent
 
 public:	
 	UHealthComponent_Base();
-	// Sets default public values for this component's properties
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-	float defaultHealth = 100.f;
 
 protected:
 	// Called when the game starts
@@ -26,11 +23,19 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-private:
-	// Private variable for this actor component
+private: // Private functions
+
+	void ChangeCanRegenerationHealth();
+
+private: // Private variable for this actor component
+	
 	float currentHealth = 0.f;
 
 	FTimerHandle timerForBeginRegeneration;
+
+	float NumberWhichHealthDecrease = 0.f;
+
+	bool bIsCanRegeneration = false;
 
 public: // Getters and setters for this actor component
 
@@ -40,10 +45,21 @@ public: // Getters and setters for this actor component
 	UFUNCTION()
 	float GetCurrentHealth() const;
 
+public: // Public variables
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	float defaultHealth = 100.f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Health")
+	float timeToStartRegeneration = 0.f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Health")
+	float increaseHealth = 0.f;
+
 public: // Public functions
 
 	UFUNCTION()
-	void TakeDamageHealth(const float& damage);
+	void TakeDamageHealth(AActor* damageActor, float damage, const UDamageType* damageType, AController* instigateBy, AActor* damageCauser);
 	UFUNCTION()
 	void HealthRegeneration();
 };

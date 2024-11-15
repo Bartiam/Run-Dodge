@@ -57,11 +57,11 @@ void ABolt_Base::MovementBolt(float deltaTime)
 void ABolt_Base::ComponentHit(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
 	UPrimitiveComponent* otherHitComponent, FVector normalImpuls, const FHitResult& hitResult)
 {
-	currentGameMode->SpawnObjectInObject(this, otherActorHit);
-
 	if (otherActorHit->ActorHasTag(FName(TEXT("Player"))))
 	{
-		
+		UGameplayStatics::ApplyDamage(otherActorHit, this->boltSettings.boltDamage, GetInstigatorController(), this, damageTypeClass);
 	}
+
+	currentGameMode->SpawnObjectInObject(this, otherActorHit);
 }
 
