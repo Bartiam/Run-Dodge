@@ -27,8 +27,7 @@ public:
 
 public: // Public variables
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Type Damage")
-	TSubclassOf<UDamageType> damageTypeClass;
+	
 
 public: // Public functions 
 
@@ -56,4 +55,6 @@ private: // Private variables
 
 	UPROPERTY()
 	class ARADCastleGameMode_Base* currentGameMode = nullptr;
+
+	TSubclassOf<UDamageType> damageTypeClass;
 };
