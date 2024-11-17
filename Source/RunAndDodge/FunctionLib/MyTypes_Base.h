@@ -7,6 +7,7 @@
 #include "MyTypes_Base.generated.h"
 
 class ABolt_Base;
+class AProjectile_Base;
 
 // State machine for movement character
 UENUM(BlueprintType)
@@ -65,6 +66,19 @@ struct FCrossbowSpecification
 	TSubclassOf<ABolt_Base> boltClass;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
 	FBoltSpecification boltSettings;
+};
+
+// Structure for catapult settings
+USTRUCT(BlueprintType)
+struct FCatapultSpecification
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Catapult settings")
+	TSubclassOf<AProjectile_Base> projectileClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Catapult settings")
+	float throwPower = 0.f;
 };
 
 UCLASS()
