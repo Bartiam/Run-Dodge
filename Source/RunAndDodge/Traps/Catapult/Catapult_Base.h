@@ -68,4 +68,8 @@ private: // Private functions
 	// Turns the catapult after firing
 	UFUNCTION()
 	void RotateCatapult();
+
+	// Gets the direction to turn
+	UFUNCTION()
+	void GetDirectionTurn();
 };

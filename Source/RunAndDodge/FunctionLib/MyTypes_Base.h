@@ -81,7 +81,9 @@ struct FCatapultSpecification
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
 	float maxThrowForwardPower = 0.f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
-	float throwUpPower = 0.f;
+	float minThrowUpPower = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	float maxThrowUpPower = 0.f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
 	class UAnimMontage* shotAnimation = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")

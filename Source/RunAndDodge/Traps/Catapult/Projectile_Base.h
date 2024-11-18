@@ -19,6 +19,8 @@ public:
 	class UStaticMeshComponent* projectileMesh = nullptr;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile")
 	float lifeSpan = 0.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Overlap collision")
+	class USphereComponent* overlapCollision = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,7 +34,15 @@ private: // Private variables
 
 	float damage = 0.f;
 
+	TSubclassOf<UDamageType> damageTypeClass;
+
 public: // Public variables
 	UFUNCTION()
 	void InitProjectile(const FVector& projectileScale, const float& projectileDamage);
+
+private: // Private functions
+
+	UFUNCTION()
+	void HandleBeginOverlap(UPrimitiveComponent* hitComponent, AActor* otherActorHit,
+		UPrimitiveComponent* otherHitComponent, int32 indesOtherActor, bool bFromSweep, const FHitResult& hitResult);
 };

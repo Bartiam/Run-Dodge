@@ -28,6 +28,7 @@ ACatapult_Base::ACatapult_Base()
 void ACatapult_Base::BeginPlay()
 {
 	Super::BeginPlay();
+	GetDirectionTurn();
 	skeletalMesh->PlayAnimation(catapultSettings.shotAnimation, true);
 }
 
@@ -41,17 +42,12 @@ void ACatapult_Base::ShotCatapult()
 {
 	physicsHandle->ReleaseComponent();
 	float currentForwardPower = UKismetMathLibrary::RandomFloatInRange(catapultSettings.minThrowForwardPower, catapultSettings.maxThrowForwardPower);
-	auto vectorImpulse = FVector(GetActorForwardVector().X * currentForwardPower, GetActorForwardVector().Y * currentForwardPower, GetActorForwardVector().Z + catapultSettings.throwUpPower);
-
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Black, vectorImpulse.ToString());
+	float currentThrowUpPower = UKismetMathLibrary::RandomFloatInRange(catapultSettings.minThrowUpPower, catapultSettings.maxThrowUpPower);
+	auto vectorImpulse = FVector(GetActorForwardVector().X * currentForwardPower, GetActorForwardVector().Y * currentForwardPower, GetActorForwardVector().Z + currentThrowUpPower);
+	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Black, FString::SanitizeFloat(currentForwardPower));
 	projectile->projectileMesh->AddImpulse(vectorImpulse);
 
-	bIsTurnPositiveOrNegative = UKismetMathLibrary::RandomBool();
-
-	if (currentRotateNumber == 30) bIsTurnPositiveOrNegative = false;
-	if (currentRotateNumber == -30) bIsTurnPositiveOrNegative = true;
-
-	GetWorldTimerManager().SetTimer(timerToRotateCatapult, this, &ACatapult_Base::RotateCatapult, 0.1f, true);
+	GetDirectionTurn();
 }
 
 void ACatapult_Base::ReloadCatapult()
@@ -85,4 +81,14 @@ void ACatapult_Base::RotateCatapult()
 	{
 		GetWorldTimerManager().ClearTimer(timerToRotateCatapult);
 	}
+}
+
+void ACatapult_Base::GetDirectionTurn()
+{
+	bIsTurnPositiveOrNegative = UKismetMathLibrary::RandomBool();
+
+	if (currentRotateNumber == 30) bIsTurnPositiveOrNegative = false;
+	if (currentRotateNumber == -30) bIsTurnPositiveOrNegative = true;
+
+	GetWorldTimerManager().SetTimer(timerToRotateCatapult, this, &ACatapult_Base::RotateCatapult, 0.1f, true);
 }

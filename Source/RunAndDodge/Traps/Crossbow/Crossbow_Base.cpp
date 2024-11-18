@@ -38,6 +38,9 @@ ACrossbow_Base::ACrossbow_Base()
 	// Create spawn collision
 	spawnCollision = CreateDefaultSubobject<UBoxComponent>(FName(TEXT("Spawn collision")));
 	spawnCollision->SetupAttachment(crossbow);
+
+	// Add tag
+	Tags.Add(FName(TEXT("Crossbow")));
 }
 
 // Called when the game starts or when spawned
