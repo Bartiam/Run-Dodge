@@ -79,7 +79,8 @@ private: // Private functions
 	void WalkStopped();
 
 private: // Private variables
-	const FInputModeGameOnly inputMode;
+
+	FInputModeGameAndUI inputModeGameAndUI;
 
 	class ARADCharacter_Base* character = nullptr;
 	class ARADHUDCastle_Base* HUD = nullptr;

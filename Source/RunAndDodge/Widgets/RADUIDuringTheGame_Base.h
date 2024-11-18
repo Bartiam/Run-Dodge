@@ -20,7 +20,7 @@ private:
 	UPROPERTY()
 	class UHealthComponent_Base* characterHealthComponent = nullptr;
 	UPROPERTY()
-	class ARADCastleCameState_Base* gameState;
+	class ARADCastleGameState_Base* gameState;
 
 public:
 	// Getter for character health

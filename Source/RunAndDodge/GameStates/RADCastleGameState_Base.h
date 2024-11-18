@@ -4,15 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
-#include "RADCastleCameState_Base.generated.h"
+#include "RADCastleGameState_Base.generated.h"
 
 UCLASS()
-class RUNANDDODGE_API ARADCastleCameState_Base : public AGameStateBase
+class RUNANDDODGE_API ARADCastleGameState_Base : public AGameStateBase
 {
 	GENERATED_BODY()
-	
-protected:
-	virtual void BeginPlay() override;
 
 private:
 	FTimerHandle timeElapsedSinceBeginLevel;
@@ -28,4 +25,6 @@ public: // Public functions
 	UFUNCTION()
 	float GetCurrentTimeSinceBeginLevel() const;
 
+	UFUNCTION()
+	void StartGame();
 };

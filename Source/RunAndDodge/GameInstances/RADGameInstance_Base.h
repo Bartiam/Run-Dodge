@@ -10,4 +10,16 @@ UCLASS()
 class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 {
 	GENERATED_BODY()
+
+private: // Private virables
+
+	float theBestTime = 0.f;
+
+public: // Getters and Setters
+
+	UFUNCTION()
+	float GetTheBestTime() const;
+
+	UFUNCTION()
+	void SetTheBestTime(const float& newTime);
 };

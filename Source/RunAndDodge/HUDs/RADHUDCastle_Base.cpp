@@ -8,7 +8,6 @@ void ARADHUDCastle_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CreateWidgetDuringTheGame();
 }
 
 void ARADHUDCastle_Base::CreateWidgetDuringTheGame()

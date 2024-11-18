@@ -5,14 +5,14 @@
 #include "../RADCharacters/RADCharacter_Base.h"
 #include "../ActorComponents/HealthComponent_Base.h"
 #include "../ActorComponents/StaminaComponent_Base.h"
-#include "../GameStates/RADCastleCameState_Base.h"
+#include "../GameStates/RADCastleGameState_Base.h"
 
 #include "Kismet/GameplayStatics.h"
 
 void URADUIDuringTheGame_Base::NativeConstruct()
 {
 	character = Cast<ARADCharacter_Base>(GetOwningPlayerPawn());
-	gameState = Cast<ARADCastleCameState_Base>(UGameplayStatics::GetGameState(GetWorld()));
+	gameState = Cast<ARADCastleGameState_Base>(UGameplayStatics::GetGameState(GetWorld()));
 }
 
 float URADUIDuringTheGame_Base::GetCurrentHealth() const

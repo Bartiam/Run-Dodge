@@ -15,8 +15,8 @@ void ARAD_PlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetInputMode(inputMode);
-	SetShowMouseCursor(false);
+	SetInputMode(inputModeGameAndUI);
+	SetShowMouseCursor(true);
 
 	// Add input mapping context
 	if (UEnhancedInputLocalPlayerSubsystem* subSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))

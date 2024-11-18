@@ -20,13 +20,14 @@ private:
 	// Variable UI widget
 	UPROPERTY()
 	URADUIDuringTheGame_Base* widgetDuringTheGame = nullptr;
-	
-	void CreateWidgetDuringTheGame();
 
 public:
 	// Class UI widget
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widget During the game")
 	TSubclassOf<URADUIDuringTheGame_Base> widgetDuringTheGame_Class;
+	// Class UI before game
+
+	void CreateWidgetDuringTheGame();
 
 	// Getter widget during the game
 	URADUIDuringTheGame_Base* GetWidgetDuringTheGame() const;

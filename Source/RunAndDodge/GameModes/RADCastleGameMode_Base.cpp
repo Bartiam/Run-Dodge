@@ -5,12 +5,15 @@
 #include "../GameInstances/RADGameInstance_Base.h"
 #include "../Traps/Crossbow/Bolt_Base.h"
 #include "../RADCharacters/RADCharacter_Base.h"
+#include "../GameStates/RADCastleGameState_Base.h"
 
 #include "GameFramework/GameUserSettings.h"
 
 void ARADCastleGameMode_Base::BeginPlay()
 {
 	Super::BeginPlay();
+
+	RADGameState = Cast<ARADCastleGameState_Base>(GetGameState<ARADCastleGameState_Base>());
 }
 
 void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* otherHitActor)
@@ -48,4 +51,9 @@ void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* othe
 
 		hitActor->Destroy();
 	}
+}
+
+void ARADCastleGameMode_Base::StartGame()
+{
+	RADGameState->StartGame();
 }

@@ -29,4 +29,13 @@ public: // Public functions
 	UFUNCTION()
 	void SpawnObjectInObject(AActor* hitActor, AActor* otherHitActor);
 
+private: // Private variables
+	
+	UPROPERTY()
+	class ARADCastleGameState_Base* RADGameState = nullptr;
+
+private: // Private functions
+
+	UFUNCTION()
+	void StartGame();
 };
