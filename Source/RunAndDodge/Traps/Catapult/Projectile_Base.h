@@ -17,6 +17,8 @@ public:
 	// Sets public values for this actor's properties
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile")
 	class UStaticMeshComponent* projectileMesh = nullptr;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile")
+	float lifeSpan = 0.f;
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,4 +28,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+private: // Private variables
+
+	float damage = 0.f;
+
+public: // Public variables
+	UFUNCTION()
+	void InitProjectile(const FVector& projectileScale, const float& projectileDamage);
 };

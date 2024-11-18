@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
+#include "../../FunctionLib/MyTypes_Base.h"
+
 #include "Catapult_Base.generated.h"
 
 UCLASS()
@@ -18,18 +21,8 @@ public:	// Public variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Catapult mesh")
 	class USkeletalMeshComponent* skeletalMesh = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Catapult settings")
-	TSubclassOf<class AProjectile_Base> projectileClass;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Catapult settings")
-	class UAnimMontage* shotAnimation = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Catapult settings")
-	float throwPower = 0.f;
-
-	// Collisiton for looking character
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Looking collision")
-	class UBoxComponent* LookingCollision = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	FCatapultSpecification catapultSettings;
 
 protected:
 	// Called when the game starts or when spawned
@@ -43,32 +36,36 @@ private: // Private variables
 
 	// Variable for grab and throw object
 	class UPhysicsHandleComponent* physicsHandle = nullptr;
-	// Anim instance for get current time animation
-	class UAnimInstance* skeletalAnimInstance = nullptr;
-	// Time to shot
-	float startAnim = 0.f;
-	// Time to reload
-	float endAnim = 0.f;
-	// Root component
-	class USceneComponent* rootSceneComponent = nullptr;
-	
-	class AActor* character = nullptr;
 
+	// Projectile
+	class AProjectile_Base* projectile = nullptr;
 
-private: // Private functions
+	FTimerHandle timerToRotateCatapult;
 
+	// The number by which the catapult has already turned
+	int8 currentRotateNumber = 0.f;
+
+	// Is the rotation positive or negative
+	bool bIsTurnPositiveOrNegative = false;
+
+	// The maximum possible turn
+	const int8 maxTurnCatapult = 30;
+	// The minimum possible turn
+	const int8 minTurnCatapult = -30;
+
+public: // Public functions
+
+	// Releases the object giving it a boost
+	UFUNCTION(BlueprintCallable)
 	void ShotCatapult();
 
 	// Capturing an object and moving it in space
+	UFUNCTION(BlueprintCallable)
 	void ReloadCatapult();
 
-	// Event when somebody begin overlap
-	UFUNCTION()
-	void HandleBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent*
-		otherComponent, int32 otherBodyIndex, bool bFromSweep, const FHitResult& sweepResult);
+private: // Private functions
 
-	// Event when somebody end overlap
+	// Turns the catapult after firing
 	UFUNCTION()
-	void HandleEndOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent*
-		otherComponent, int32 otherBodyIndex);
+	void RotateCatapult();
 };

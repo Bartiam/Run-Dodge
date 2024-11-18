@@ -33,3 +33,10 @@ void AProjectile_Base::Tick(float DeltaTime)
 
 }
 
+void AProjectile_Base::InitProjectile(const FVector& projectileScale, const float& projectileDamage)
+{
+	SetLifeSpan(lifeSpan);
+	SetActorScale3D(projectileScale);
+	damage = projectileDamage;
+}
+

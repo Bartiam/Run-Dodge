@@ -44,11 +44,11 @@ struct FBoltSpecification
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt settings")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bolt settings")
 	float boltDamage = 0.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt settings")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bolt settings")
 	float boltSpeed = 0.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Bolt settings")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bolt settings")
 	FVector boltScale;
 };
 
@@ -58,13 +58,13 @@ struct FCrossbowSpecification
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Crossbow settings")
 	float timeBeforeShoot = 0.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Crossbow settings")
 	float timeReload = 0.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Crossbow settings")
 	TSubclassOf<ABolt_Base> boltClass;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Crossbow settings")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Crossbow settings")
 	FBoltSpecification boltSettings;
 };
 
@@ -74,11 +74,20 @@ struct FCatapultSpecification
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Catapult settings")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
 	TSubclassOf<AProjectile_Base> projectileClass;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Catapult settings")
-	float throwPower = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	float minThrowForwardPower = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	float maxThrowForwardPower = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	float throwUpPower = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	class UAnimMontage* shotAnimation = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	FVector projectileScale = FVector::Zero();
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	float projectileDamage = 0.f;
 };
 
 UCLASS()
