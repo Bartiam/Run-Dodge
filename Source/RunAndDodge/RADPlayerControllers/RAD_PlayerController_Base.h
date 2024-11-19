@@ -7,6 +7,7 @@
 #include "RAD_PlayerController_Base.generated.h"
 
 class UInputAction;
+class ARADHUDCastle_Base;
 
 UCLASS()
 class RUNANDDODGE_API ARAD_PlayerController_Base : public APlayerController
@@ -16,7 +17,7 @@ class RUNANDDODGE_API ARAD_PlayerController_Base : public APlayerController
 protected:
 	virtual void BeginPlay() override;
 
-public:
+public: // Public variables
 	// Input
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	UInputAction* movementInputCharacter = nullptr;
@@ -80,10 +81,21 @@ private: // Private functions
 
 private: // Private variables
 
-	FInputModeGameAndUI inputModeGameAndUI;
+	FInputModeGameAndUI inputGameAndUI;
+	FInputModeGameOnly inputGameOnly;
 
 	class ARADCharacter_Base* character = nullptr;
-	class ARADHUDCastle_Base* HUD = nullptr;
+	ARADHUDCastle_Base* HUD = nullptr;
 
 	FTimerHandle timerToAccelirationRun;
+
+public: // Getters and setters
+
+	UFUNCTION()
+	ARADHUDCastle_Base* GetMyHUD() const;
+
+public: // Public functions
+
+	UFUNCTION()
+	void SetGameInputSettings(const bool& bIsGameEnd);
 };

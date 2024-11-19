@@ -2,6 +2,9 @@
 
 
 #include "HealthComponent_Base.h"
+#include "../GameModes/RADCastleGameMode_Base.h"
+
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 UHealthComponent_Base::UHealthComponent_Base()
@@ -51,6 +54,12 @@ void UHealthComponent_Base::TakeDamageHealth(AActor* damageActor, float damage, 
 	GetWorld()->GetTimerManager().ClearTimer(timerForBeginRegeneration);
 	bIsCanRegeneration = false;
 	currentHealth -= damage;
+	if (currentHealth <= 0.f)
+	{
+		auto gameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
+		gameMode->EndGame();
+	}
+	
 	GetWorld()->GetTimerManager().SetTimer(timerForBeginRegeneration, this, &UHealthComponent_Base::ChangeCanRegenerationHealth, timeToStartRegeneration, false);
 }
 

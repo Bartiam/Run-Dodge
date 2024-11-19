@@ -15,9 +15,6 @@ void ARAD_PlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetInputMode(inputModeGameAndUI);
-	SetShowMouseCursor(true);
-
 	// Add input mapping context
 	if (UEnhancedInputLocalPlayerSubsystem* subSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
@@ -145,4 +142,23 @@ void ARAD_PlayerController_Base::WalkStopped()
 {
 	character->bIsCharacterWalk = false;
 	character->UpdateMovementState();
+}
+
+ARADHUDCastle_Base* ARAD_PlayerController_Base::GetMyHUD() const
+{ return HUD; }
+
+void ARAD_PlayerController_Base::SetGameInputSettings(const bool& bIsGameEnd)
+{
+	if (bIsGameEnd)
+	{
+		HUD->CreateEndGameWidget();
+		SetInputMode(inputGameAndUI);
+		SetShowMouseCursor(true);
+	}
+	else
+	{
+		HUD->CreateWidgetDuringTheGame();
+		SetInputMode(inputGameOnly);
+		SetShowMouseCursor(false);
+	}
 }

@@ -29,6 +29,12 @@ public: // Public functions
 	UFUNCTION()
 	void SpawnObjectInObject(AActor* hitActor, AActor* otherHitActor);
 
+	UFUNCTION(BlueprintCallable)
+	void StartGame();
+
+	UFUNCTION()
+	void EndGame();
+
 private: // Private variables
 	
 	UPROPERTY()
@@ -36,6 +42,5 @@ private: // Private variables
 
 private: // Private functions
 
-	UFUNCTION()
-	void StartGame();
+	
 };

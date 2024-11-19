@@ -11,7 +11,15 @@ class RUNANDDODGE_API ARADCastleGameState_Base : public AGameStateBase
 {
 	GENERATED_BODY()
 
+protected:
+
+	virtual void BeginPlay() override;
+
 private:
+	
+	UPROPERTY()
+
+
 	FTimerHandle timeElapsedSinceBeginLevel;
 
 	float currentTime = 0.f;
@@ -19,7 +27,16 @@ private:
 	UFUNCTION()
 	void SetCurrentTimeSinceBeginLevel();
 
+	UPROPERTY()
+	class ARAD_PlayerController_Base* playerController = nullptr;
+
+	UPROPERTY()
+	class URADGameInstance_Base* gameInstance = nullptr;
+
 public: // Public functions
+
+	UPROPERTY()
+	bool bIsGameEnded = false;
 
 	// return elapes time since begin play
 	UFUNCTION()
@@ -27,4 +44,7 @@ public: // Public functions
 
 	UFUNCTION()
 	void StartGame();
+
+	UFUNCTION()
+	void EndGame();
 };

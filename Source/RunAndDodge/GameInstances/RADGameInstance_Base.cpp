@@ -10,4 +10,5 @@ float URADGameInstance_Base::GetTheBestTime() const
 
 void URADGameInstance_Base::SetTheBestTime(const float& newTime)
 {
+	theBestTime = newTime;
 }

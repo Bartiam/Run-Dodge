@@ -57,3 +57,8 @@ void ARADCastleGameMode_Base::StartGame()
 {
 	RADGameState->StartGame();
 }
+
+void ARADCastleGameMode_Base::EndGame()
+{
+	RADGameState->EndGame();
+}
