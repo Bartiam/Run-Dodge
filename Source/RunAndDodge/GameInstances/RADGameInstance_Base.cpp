@@ -3,13 +3,13 @@
 
 #include "RADGameInstance_Base.h"
 
-float URADGameInstance_Base::GetEndlessModeBestTime() const
+float URADGameInstance_Base::GetFirstLevelBestTime() const
 {
-	return endlessModeBestTime;
+	return firstLevelBestTime;
 }
 
-void URADGameInstance_Base::SetEndlessModeBestTime(const float& newTime)
+void URADGameInstance_Base::SetFirstLevelBestTime(const float& newTime)
 {
-	if (newTime > endlessModeBestTime)
-		endlessModeBestTime = newTime;
+	if (firstLevelBestTime == 0.f || newTime < firstLevelBestTime)
+		firstLevelBestTime = newTime;
 }

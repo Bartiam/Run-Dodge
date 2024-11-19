@@ -26,6 +26,10 @@ private:
 	UPROPERTY()
 	class UUserWidget* widgetEndGame = nullptr;
 
+	// Variable UI before game
+	UPROPERTY()
+	URADUIBeforeStartGame_Base* widgetBeforeGame = nullptr;
+
 public:
 	// Class UI before game
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
@@ -35,7 +39,7 @@ public:
 	TSubclassOf<URADUIDuringTheGame_Base> widgetDuringTheGame_Class;
 	// Class UI end game
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
-	TSubclassOf<URADUIBeforeStartGame_Base> widgetEndGame_Class;
+	TSubclassOf<UUserWidget> widgetEndGame_Class;
 
 
 	UFUNCTION()
@@ -46,4 +50,8 @@ public:
 
 	// Getter widget during the game
 	URADUIDuringTheGame_Base* GetWidgetDuringTheGame() const;
+	// Getter widget and game
+	UUserWidget* GetWidgetEndGame() const;
+	// Getter widget before game
+	URADUIBeforeStartGame_Base* GetWidgetBeforeGame() const;
 };

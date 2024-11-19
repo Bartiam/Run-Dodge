@@ -56,11 +56,12 @@ void UHealthComponent_Base::TakeDamageHealth(AActor* damageActor, float damage, 
 	currentHealth -= damage;
 	if (currentHealth <= 0.f)
 	{
+		currentHealth = 0.f;
 		auto gameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
 		gameMode->EndGame();
 	}
-	
-	GetWorld()->GetTimerManager().SetTimer(timerForBeginRegeneration, this, &UHealthComponent_Base::ChangeCanRegenerationHealth, timeToStartRegeneration, false);
+	else
+		GetWorld()->GetTimerManager().SetTimer(timerForBeginRegeneration, this, &UHealthComponent_Base::ChangeCanRegenerationHealth, timeToStartRegeneration, false);
 }
 
 void UHealthComponent_Base::HealthRegeneration()

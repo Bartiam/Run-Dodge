@@ -13,13 +13,16 @@ class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 
 private: // Private virables
 
-	float endlessModeBestTime = 0.f;
+	// The best time in endless mode
+	float firstLevelBestTime = 0.f;
 
 public: // Getters and Setters
 
+	// Getter the best time in endless mode
 	UFUNCTION()
-	float GetEndlessModeBestTime() const;
+	float GetFirstLevelBestTime() const;
 
+	// Setter the best time in endless mode
 	UFUNCTION()
-	void SetEndlessModeBestTime(const float& newTime);
+	void SetFirstLevelBestTime(const float& newTime);
 };

@@ -11,5 +11,5 @@ void URADUIBeforeStartGame_Base::NativeConstruct()
 
 float URADUIBeforeStartGame_Base::GetBestEndlessModeTime()
 {
-	return gameInstance->GetEndlessModeBestTime();
+	return gameInstance->GetFirstLevelBestTime();
 }

@@ -30,10 +30,10 @@ private:
 	UPROPERTY()
 	class URADGameInstance_Base* gameInstance = nullptr;
 
-public: // Public functions
-
 	UPROPERTY()
-	bool bIsGameEnded = false;
+	class ARADCharacter_Base* character = nullptr;
+
+public: // Public functions
 
 	// return elapes time since begin play
 	UFUNCTION()
@@ -44,4 +44,9 @@ public: // Public functions
 
 	UFUNCTION()
 	void EndGame();
+
+public: // Public variables
+
+	UPROPERTY()
+	bool bIsGameEnded = false;
 };

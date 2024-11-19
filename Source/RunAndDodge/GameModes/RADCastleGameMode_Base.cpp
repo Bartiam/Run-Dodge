@@ -13,7 +13,7 @@ void ARADCastleGameMode_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	RADGameState = Cast<ARADCastleGameState_Base>(GetGameState<ARADCastleGameState_Base>());
+	RADGameState = Cast<ARADCastleGameState_Base>(GameState);
 }
 
 void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* otherHitActor)

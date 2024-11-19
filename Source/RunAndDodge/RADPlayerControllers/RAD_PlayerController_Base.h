@@ -17,6 +17,8 @@ class RUNANDDODGE_API ARAD_PlayerController_Base : public APlayerController
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void Tick(float DeltaTime) override;
+
 public: // Public variables
 	// Input
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
@@ -97,5 +99,5 @@ public: // Getters and setters
 public: // Public functions
 
 	UFUNCTION()
-	void SetGameInputSettings(const bool& bIsGameEnd);
+	void SetControlSettings(const bool& bIsGameEnded);
 };

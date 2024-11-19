@@ -5,6 +5,7 @@
 #include "../RADCharacters/RADCharacter_Base.h"
 #include "../HUDs/RADHUDCastle_Base.h"
 #include "../Widgets/RADUIDuringTheGame_Base.h"
+#include "../Widgets/RADUIBeforeStartGame_Base.h"
 
 #include "EnhancedInput/Public/EnhancedInputComponent.h"
 #include "InputAction.h"
@@ -15,6 +16,9 @@ void ARAD_PlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
+	SetInputMode(inputGameOnly);
+	SetShowMouseCursor(false);
+
 	// Add input mapping context
 	if (UEnhancedInputLocalPlayerSubsystem* subSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
@@ -24,6 +28,13 @@ void ARAD_PlayerController_Base::BeginPlay()
 	character = Cast<ARADCharacter_Base>(GetPawn());
 	HUD = Cast<ARADHUDCastle_Base>(GetHUD());
 }
+
+void ARAD_PlayerController_Base::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+
 
 void ARAD_PlayerController_Base::SetupInputComponent()
 {
@@ -147,18 +158,20 @@ void ARAD_PlayerController_Base::WalkStopped()
 ARADHUDCastle_Base* ARAD_PlayerController_Base::GetMyHUD() const
 { return HUD; }
 
-void ARAD_PlayerController_Base::SetGameInputSettings(const bool& bIsGameEnd)
+void ARAD_PlayerController_Base::SetControlSettings(const bool& bIsGameEnded)
 {
-	if (bIsGameEnd)
+	if (bIsGameEnded)
 	{
-		HUD->CreateEndGameWidget();
-		SetInputMode(inputGameAndUI);
-		SetShowMouseCursor(true);
+		if (!IsValid(HUD->GetWidgetEndGame()))
+		{
+			HUD->GetWidgetDuringTheGame()->RemoveFromParent();
+			HUD->CreateEndGameWidget();
+			SetInputMode(inputGameAndUI);
+			SetShowMouseCursor(true);
+		}
 	}
 	else
 	{
 		HUD->CreateWidgetDuringTheGame();
-		SetInputMode(inputGameOnly);
-		SetShowMouseCursor(false);
 	}
 }

@@ -32,7 +32,7 @@ public: // Public functions
 	UFUNCTION(BlueprintCallable)
 	void StartGame();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void EndGame();
 
 private: // Private variables
@@ -42,5 +42,4 @@ private: // Private variables
 
 private: // Private functions
 
-	
 };

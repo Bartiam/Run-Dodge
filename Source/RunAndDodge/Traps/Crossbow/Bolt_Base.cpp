@@ -5,7 +5,6 @@
 #include "Components/BoxComponent.h"
 
 #include "../../GameModes/RADCastleGameMode_Base.h"
-#include "../../Interfaces/IInteractable.h"
 
 #include "Kismet/GameplayStatics.h"
 

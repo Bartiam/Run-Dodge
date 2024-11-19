@@ -44,7 +44,6 @@ void ACatapult_Base::ShotCatapult()
 	float currentForwardPower = UKismetMathLibrary::RandomFloatInRange(catapultSettings.minThrowForwardPower, catapultSettings.maxThrowForwardPower);
 	float currentThrowUpPower = UKismetMathLibrary::RandomFloatInRange(catapultSettings.minThrowUpPower, catapultSettings.maxThrowUpPower);
 	auto vectorImpulse = FVector(GetActorForwardVector().X * currentForwardPower, GetActorForwardVector().Y * currentForwardPower, GetActorForwardVector().Z + currentThrowUpPower);
-	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Black, FString::SanitizeFloat(currentForwardPower));
 	projectile->projectileMesh->AddImpulse(vectorImpulse);
 
 	GetDirectionTurn();
