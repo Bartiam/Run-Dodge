@@ -24,7 +24,7 @@ private:
 
 	// Variable UI end game widget
 	UPROPERTY()
-	URADUIBeforeStartGame_Base* widgetEndGame = nullptr;
+	class UUserWidget* widgetEndGame = nullptr;
 
 public:
 	// Class UI before game

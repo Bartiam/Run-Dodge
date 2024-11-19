@@ -24,7 +24,7 @@ void ARADHUDCastle_Base::CreateWidgetDuringTheGame()
 
 void ARADHUDCastle_Base::CreateEndGameWidget()
 {
-	widgetEndGame = CreateWidget<URADUIBeforeStartGame_Base>(GetWorld(), widgetEndGame_Class);
+	widgetEndGame = CreateWidget<UUserWidget>(GetWorld(), widgetEndGame_Class);
 	widgetEndGame->AddToViewport();
 }
 

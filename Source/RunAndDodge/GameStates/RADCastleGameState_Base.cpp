@@ -33,7 +33,7 @@ void ARADCastleGameState_Base::StartGame()
 
 void ARADCastleGameState_Base::EndGame()
 {
-	gameInstance->SetTheBestTime(currentTime);
+	gameInstance->SetEndlessModeBestTime(currentTime);
 	bIsGameEnded = true;
 	GetWorldTimerManager().ClearTimer(timeElapsedSinceBeginLevel);
 	playerController->SetGameInputSettings(bIsGameEnded);

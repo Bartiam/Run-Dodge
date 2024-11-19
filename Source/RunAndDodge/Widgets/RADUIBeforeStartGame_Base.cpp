@@ -9,7 +9,7 @@ void URADUIBeforeStartGame_Base::NativeConstruct()
 	gameInstance = Cast<URADGameInstance_Base>(GetGameInstance());
 }
 
-float URADUIBeforeStartGame_Base::GetTheBestTime()
+float URADUIBeforeStartGame_Base::GetBestEndlessModeTime()
 {
-	return gameInstance->GetTheBestTime();
+	return gameInstance->GetEndlessModeBestTime();
 }

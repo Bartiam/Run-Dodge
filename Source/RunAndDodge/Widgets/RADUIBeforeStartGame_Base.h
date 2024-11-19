@@ -23,5 +23,5 @@ private: // Private functions
 public: // Public functions
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	float GetTheBestTime();
+	float GetBestEndlessModeTime();
 };
