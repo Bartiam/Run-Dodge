@@ -99,5 +99,5 @@ public: // Getters and setters
 public: // Public functions
 
 	UFUNCTION()
-	void SetControlSettings(const bool& bIsGameEnded);
+	void SetControlSettings(const bool& bIsGameEnded, const bool& bIsWonLevel);
 };

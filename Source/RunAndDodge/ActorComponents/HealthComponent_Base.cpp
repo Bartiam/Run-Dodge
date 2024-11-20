@@ -60,7 +60,7 @@ void UHealthComponent_Base::TakeDamageHealth(AActor* damageActor, float damage, 
 	{
 		currentHealth = 0.f;
 		characterOwner->CharacterDied();
-		gameMode->EndGame();
+		gameMode->GameOver();
 	}
 	else
 		GetWorld()->GetTimerManager().SetTimer(timerForBeginRegeneration, this, &UHealthComponent_Base::ChangeCanRegenerationHealth, timeToStartRegeneration, false);

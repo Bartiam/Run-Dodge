@@ -7,6 +7,7 @@
 #include "../GameInstances/RADGameInstance_Base.h"
 #include "../RADCharacters/RADCharacter_Base.h"
 #include "../GameModes/RADCastleGameMode_Base.h"
+#include "../Savers/Saver_Base.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -23,19 +24,35 @@ void ARADCastleGameState_Base::SetCurrentTimeSinceBeginLevel()
 	currentTime += 0.1f;
 }
 
+void ARADCastleGameState_Base::SaveRADGame()
+{
+
+}
+
+void ARADCastleGameState_Base::LoadRADGame()
+{
+
+}
+
 float ARADCastleGameState_Base::GetCurrentTimeSinceBeginLevel() const
 { return currentTime; }
 
 void ARADCastleGameState_Base::StartGame()
 {
-	playerController->SetControlSettings(gameMode->bIsGameEnded);
+	playerController->SetControlSettings(gameMode->bIsGameOver, gameMode->bIsWonLevel);
 	GetWorldTimerManager().SetTimer(timeElapsedSinceBeginLevel, this, &ARADCastleGameState_Base::SetCurrentTimeSinceBeginLevel, 0.1f, true);
 }
 
-void ARADCastleGameState_Base::EndGame()
+void ARADCastleGameState_Base::GameOver()
 {
-	gameInstance->SetFirstLevelBestTime(currentTime);
-	playerController->SetControlSettings(gameMode->bIsGameEnded);
+	playerController->SetControlSettings(gameMode->bIsGameOver, gameMode->bIsWonLevel);
 	playerController->DisableInput(playerController);
+	GetWorldTimerManager().ClearTimer(timeElapsedSinceBeginLevel);
+}
+
+void ARADCastleGameState_Base::WonLevel()
+{
+	gameInstance->SetTheBestLevelTime(currentTime);
+	playerController->SetControlSettings(gameMode->bIsGameOver, gameMode->bIsWonLevel);
 	GetWorldTimerManager().ClearTimer(timeElapsedSinceBeginLevel);
 }

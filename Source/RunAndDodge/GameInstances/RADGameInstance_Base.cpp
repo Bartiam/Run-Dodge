@@ -3,13 +3,21 @@
 
 #include "RADGameInstance_Base.h"
 
-float URADGameInstance_Base::GetFirstLevelBestTime() const
+float URADGameInstance_Base::GetTheBestLevelTime() const
 {
 	return firstLevelBestTime;
 }
 
-void URADGameInstance_Base::SetFirstLevelBestTime(const float& newTime)
+void URADGameInstance_Base::SetTheBestLevelTime(const float& newTime)
 {
-	if (firstLevelBestTime == 0.f || newTime < firstLevelBestTime)
+	if (firstLevelBestTime <= 0.f || newTime < firstLevelBestTime)
+	{
 		firstLevelBestTime = newTime;
+		bIsNewRecord = true;
+	}
+}
+
+FString URADGameInstance_Base::GetNameCurrentLevel()
+{
+	return FString();
 }

@@ -87,7 +87,10 @@ void ACrossbow_Base::HandleEndOverlap(UPrimitiveComponent* overlappedComponent,
 	AActor* otherActor, UPrimitiveComponent* otherComponent, int32 otherBodyIndex)
 {
 	if (otherActor->ActorHasTag(FName(TEXT("Player"))))
+	{
 		character = nullptr;
+		GetWorldTimerManager().ClearTimer(timerToShoot);
+	}
 }
 
 void ACrossbow_Base::ShootBolt()
@@ -103,6 +106,6 @@ void ACrossbow_Base::ReloadCrossbow()
 
 	if (character)
 	{
-		ShootBolt();
+		GetWorldTimerManager().SetTimer(timerToShoot, this, &ACrossbow_Base::ShootBolt, crossbowSettings.timeBeforeShoot, false);
 	}
 }

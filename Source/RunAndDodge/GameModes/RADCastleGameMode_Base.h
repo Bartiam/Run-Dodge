@@ -25,7 +25,8 @@ public: // Public variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Lifetime objects")
 	float lifeSpanObjects = 0.f;
 
-	bool bIsGameEnded;
+	bool bIsGameOver;
+	bool bIsWonLevel;
 
 public: // Public functions
 
@@ -36,14 +37,14 @@ public: // Public functions
 	UFUNCTION(BlueprintCallable)
 	void StartGame();
 
-	UFUNCTION(BlueprintCallable)
-	void EndGame();
+	UFUNCTION()
+	void GameOver();
+
+	UFUNCTION()
+	void WonLevel();
 
 private: // Private variables
-	
+
 	UPROPERTY()
 	class ARADCastleGameState_Base* RADGameState = nullptr;
-
-private: // Private functions
-
 };

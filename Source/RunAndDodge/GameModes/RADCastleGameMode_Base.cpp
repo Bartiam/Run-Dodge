@@ -2,10 +2,10 @@
 
 
 #include "RADCastleGameMode_Base.h"
-#include "../GameInstances/RADGameInstance_Base.h"
 #include "../Traps/Crossbow/Bolt_Base.h"
 #include "../RADCharacters/RADCharacter_Base.h"
 #include "../GameStates/RADCastleGameState_Base.h"
+#include "../Savers/Saver_Base.h"
 
 #include "GameFramework/GameUserSettings.h"
 
@@ -57,12 +57,19 @@ void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* othe
 
 void ARADCastleGameMode_Base::StartGame()
 {
-	bIsGameEnded = false;
+	bIsGameOver = false;
+	bIsWonLevel = false;
 	RADGameState->StartGame();
 }
 
-void ARADCastleGameMode_Base::EndGame()
+void ARADCastleGameMode_Base::GameOver()
 {
-	bIsGameEnded = true;
-	RADGameState->EndGame();
+	bIsGameOver = true;
+	RADGameState->GameOver();
+}
+
+void ARADCastleGameMode_Base::WonLevel()
+{
+	bIsWonLevel = true;
+	RADGameState->WonLevel();
 }

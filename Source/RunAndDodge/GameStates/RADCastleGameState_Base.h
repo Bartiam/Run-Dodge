@@ -15,14 +15,13 @@ protected:
 
 	virtual void BeginPlay() override;
 
-private:
+private: // Private variables
+
+	class USaver_Base* RADSaver = nullptr;
 
 	FTimerHandle timeElapsedSinceBeginLevel;
 
 	float currentTime = 0.f;
-
-	UFUNCTION()
-	void SetCurrentTimeSinceBeginLevel();
 
 	UPROPERTY()
 	class ARAD_PlayerController_Base* playerController = nullptr;
@@ -36,6 +35,17 @@ private:
 	UPROPERTY()
 	class ARADCastleGameMode_Base* gameMode = nullptr;
 
+private: // Private functions
+
+	UFUNCTION()
+	void SetCurrentTimeSinceBeginLevel();
+
+	UFUNCTION()
+	void SaveRADGame();
+
+	UFUNCTION()
+	void LoadRADGame();
+
 public: // Public functions
 
 	// return elapes time since begin play
@@ -46,5 +56,8 @@ public: // Public functions
 	void StartGame();
 
 	UFUNCTION()
-	void EndGame();
+	void GameOver();
+
+	UFUNCTION()
+	void WonLevel();
 };

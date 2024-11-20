@@ -12,17 +12,24 @@ class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 	GENERATED_BODY()
 
 private: // Private virables
-
+	TMap<FString, float> levels;
 	// The best time in endless mode
 	float firstLevelBestTime = 0.f;
 
 public: // Getters and Setters
 
-	// Getter the best time in endless mode
+	// Getter the best time
 	UFUNCTION()
-	float GetFirstLevelBestTime() const;
+	float GetTheBestLevelTime() const;
 
-	// Setter the best time in endless mode
+	// Setter the best time
 	UFUNCTION()
-	void SetFirstLevelBestTime(const float& newTime);
+	void SetTheBestLevelTime(const float& newTime);
+
+	// Getter name level
+	FString GetNameCurrentLevel();
+
+public: // Public variables
+
+	bool bIsNewRecord = false;
 };

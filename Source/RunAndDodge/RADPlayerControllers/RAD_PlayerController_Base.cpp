@@ -158,7 +158,7 @@ void ARAD_PlayerController_Base::WalkStopped()
 ARADHUDCastle_Base* ARAD_PlayerController_Base::GetMyHUD() const
 { return HUD; }
 
-void ARAD_PlayerController_Base::SetControlSettings(const bool& bIsGameEnded)
+void ARAD_PlayerController_Base::SetControlSettings(const bool& bIsGameEnded, const bool& bIsWonLevel)
 {
 	if (bIsGameEnded)
 	{
@@ -169,6 +169,13 @@ void ARAD_PlayerController_Base::SetControlSettings(const bool& bIsGameEnded)
 			SetInputMode(inputGameAndUI);
 			SetShowMouseCursor(true);
 		}
+	}
+	else if (bIsWonLevel)
+	{
+		HUD->GetWidgetDuringTheGame()->RemoveFromParent();
+		HUD->CreateWonGameWidget();
+		SetInputMode(inputGameAndUI);
+		SetShowMouseCursor(true);
 	}
 	else
 	{

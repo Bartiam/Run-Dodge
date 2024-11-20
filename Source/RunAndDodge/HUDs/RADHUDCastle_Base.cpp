@@ -28,6 +28,12 @@ void ARADHUDCastle_Base::CreateEndGameWidget()
 	widgetEndGame->AddToViewport();
 }
 
+void ARADHUDCastle_Base::CreateWonGameWidget()
+{
+	widgetWonLevel = CreateWidget<URADUIBeforeStartGame_Base>(GetWorld(), widgetWonLevel_Class);
+	widgetWonLevel->AddToViewport();
+}
+
 URADUIDuringTheGame_Base* ARADHUDCastle_Base::GetWidgetDuringTheGame() const
 {
 	return widgetDuringTheGame;

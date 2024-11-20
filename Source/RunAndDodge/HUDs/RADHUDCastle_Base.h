@@ -30,6 +30,10 @@ private:
 	UPROPERTY()
 	URADUIBeforeStartGame_Base* widgetBeforeGame = nullptr;
 
+	// Variable UI won level
+	UPROPERTY()
+	URADUIBeforeStartGame_Base* widgetWonLevel = nullptr;
+
 public:
 	// Class UI before game
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
@@ -40,6 +44,9 @@ public:
 	// Class UI end game
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
 	TSubclassOf<UUserWidget> widgetEndGame_Class;
+	// Class UI won game
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
+	TSubclassOf<URADUIBeforeStartGame_Base> widgetWonLevel_Class;
 
 
 	UFUNCTION()
@@ -47,6 +54,9 @@ public:
 
 	UFUNCTION()
 	void CreateEndGameWidget();
+
+	UFUNCTION()
+	void CreateWonGameWidget();
 
 	// Getter widget during the game
 	URADUIDuringTheGame_Base* GetWidgetDuringTheGame() const;
