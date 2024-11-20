@@ -22,7 +22,7 @@ void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* othe
 	if (otherHitActor->ActorHasTag(FName(TEXT("Bolt"))))
 	{
 		auto firstBolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, hitActor->GetTransform());
-		auto secondBolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, hitActor->GetTransform());
+		auto secondBolt = GetWorld()->SpawnActor<ABolt_Base>(boltClass, otherHitActor->GetTransform());
 
 		firstBolt->SetLifeSpan(lifeSpanObjects);
 		secondBolt->SetLifeSpan(lifeSpanObjects);
@@ -46,7 +46,9 @@ void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* othe
 		// Collision with a character
 		if (otherHitActor->ActorHasTag(FName(TEXT("Player"))))
 		{
-			boltInObject->AttachToActor(otherHitActor, FAttachmentTransformRules::KeepWorldTransform);
+			//boltInObject->AttachToActor(otherHitActor, FAttachmentTransformRules::KeepWorldTransform);
+			character = Cast<ARADCharacter_Base>(otherHitActor);
+			boltInObject->AttachToComponent(character->GetMesh(), FAttachmentTransformRules::KeepWorldTransform);
 		}
 
 		hitActor->Destroy();
@@ -55,10 +57,12 @@ void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* othe
 
 void ARADCastleGameMode_Base::StartGame()
 {
+	bIsGameEnded = false;
 	RADGameState->StartGame();
 }
 
 void ARADCastleGameMode_Base::EndGame()
 {
+	bIsGameEnded = true;
 	RADGameState->EndGame();
 }

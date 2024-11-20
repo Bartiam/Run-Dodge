@@ -29,11 +29,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-
 private: // Private variables
+
+	bool bIsCharacterDied = false;
 
 	// Character camera component
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
@@ -89,4 +87,7 @@ public: // Public functions
 
 	UFUNCTION()
 	void CharacterJumping();
+
+	UFUNCTION()
+	void CharacterDied();
 };

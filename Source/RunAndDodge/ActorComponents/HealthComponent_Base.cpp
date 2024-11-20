@@ -3,6 +3,7 @@
 
 #include "HealthComponent_Base.h"
 #include "../GameModes/RADCastleGameMode_Base.h"
+#include "../RADCharacters/RADCharacter_Base.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -12,8 +13,6 @@ UHealthComponent_Base::UHealthComponent_Base()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
 
@@ -24,6 +23,9 @@ void UHealthComponent_Base::BeginPlay()
 
 	currentHealth = defaultHealth;
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent_Base::TakeDamageHealth);
+
+	gameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
+	characterOwner = Cast<ARADCharacter_Base>(GetOwner());
 }
 
 
@@ -57,7 +59,7 @@ void UHealthComponent_Base::TakeDamageHealth(AActor* damageActor, float damage, 
 	if (currentHealth <= 0.f)
 	{
 		currentHealth = 0.f;
-		auto gameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
+		characterOwner->CharacterDied();
 		gameMode->EndGame();
 	}
 	else

@@ -33,6 +33,9 @@ private:
 	UPROPERTY()
 	class ARADCharacter_Base* character = nullptr;
 
+	UPROPERTY()
+	class ARADCastleGameMode_Base* gameMode = nullptr;
+
 public: // Public functions
 
 	// return elapes time since begin play
@@ -44,9 +47,4 @@ public: // Public functions
 
 	UFUNCTION()
 	void EndGame();
-
-public: // Public variables
-
-	UPROPERTY()
-	bool bIsGameEnded = false;
 };

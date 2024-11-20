@@ -16,12 +16,16 @@ protected:
 
 public: // Public variables
 
+	class ARADCharacter_Base* character = nullptr;
+
 	// Bolt which swapn in objects
 	TSubclassOf<class ABolt_Base> boltClass;
 
 	// The life of objects in the world
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Lifetime objects")
 	float lifeSpanObjects = 0.f;
+
+	bool bIsGameEnded;
 
 public: // Public functions
 

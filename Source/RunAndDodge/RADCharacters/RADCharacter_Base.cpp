@@ -66,6 +66,11 @@ void ARADCharacter_Base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (bIsCharacterDied)
+	{
+		SetActorLocation(GetMesh()->GetComponentLocation());
+	}
+
 	if (bIsCharacterSprint)
 	{
 		staminaComponent->numberWhichStaminaChanges = DeltaTime * staminaComponent->decreaseStamina;
@@ -74,13 +79,6 @@ void ARADCharacter_Base::Tick(float DeltaTime)
 	{
 		staminaComponent->numberWhichStaminaChanges = DeltaTime * staminaComponent->increaseStamina;
 	}
-}
-
-// Called to bind functionality to input
-void ARADCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void ARADCharacter_Base::UpdateMovementSpeed()
@@ -150,4 +148,13 @@ void ARADCharacter_Base::CharacterJumping()
 		bIsCharacterJump = true;
 		staminaComponent->ReduseStaminaJump();
 	}
+}
+
+void ARADCharacter_Base::CharacterDied()
+{
+	bIsCharacterDied = true;
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	GetMesh()->SetSimulatePhysics(true);
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	springArm->bDoCollisionTest = false;
 }

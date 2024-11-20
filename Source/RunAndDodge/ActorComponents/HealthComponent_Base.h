@@ -37,6 +37,10 @@ private: // Private variable for this actor component
 
 	bool bIsCanRegeneration = false;
 
+	class ARADCastleGameMode_Base* gameMode = nullptr;
+
+	class ARADCharacter_Base* characterOwner = nullptr;
+
 public: // Getters and setters for this actor component
 
 	// Getter and setter current health
