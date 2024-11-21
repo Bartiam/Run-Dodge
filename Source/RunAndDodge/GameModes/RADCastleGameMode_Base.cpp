@@ -65,11 +65,13 @@ void ARADCastleGameMode_Base::StartGame()
 void ARADCastleGameMode_Base::GameOver()
 {
 	bIsGameOver = true;
+	bIsWonLevel = false;
 	RADGameState->GameOver();
 }
 
 void ARADCastleGameMode_Base::WonLevel()
 {
 	bIsWonLevel = true;
+	bIsGameOver = false;
 	RADGameState->WonLevel();
 }

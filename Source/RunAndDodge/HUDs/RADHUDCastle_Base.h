@@ -8,6 +8,7 @@
 
 class URADUIDuringTheGame_Base;
 class URADUIBeforeStartGame_Base;
+class UUserWidget;
 
 UCLASS()
 class RUNANDDODGE_API ARADHUDCastle_Base : public AHUD
@@ -24,11 +25,11 @@ private:
 
 	// Variable UI end game widget
 	UPROPERTY()
-	class UUserWidget* widgetEndGame = nullptr;
+	UUserWidget* widgetEndGame = nullptr;
 
 	// Variable UI before game
 	UPROPERTY()
-	URADUIBeforeStartGame_Base* widgetBeforeGame = nullptr;
+	UUserWidget* widgetBeforeGame = nullptr;
 
 	// Variable UI won level
 	UPROPERTY()
@@ -37,7 +38,7 @@ private:
 public:
 	// Class UI before game
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
-	TSubclassOf<URADUIBeforeStartGame_Base> widgetBeforeGame_Class;
+	TSubclassOf<UUserWidget> widgetBeforeGame_Class;
 	// Class UI widget
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
 	TSubclassOf<URADUIDuringTheGame_Base> widgetDuringTheGame_Class;
@@ -63,5 +64,5 @@ public:
 	// Getter widget and game
 	UUserWidget* GetWidgetEndGame() const;
 	// Getter widget before game
-	URADUIBeforeStartGame_Base* GetWidgetBeforeGame() const;
+	UUserWidget* GetWidgetBeforeGame() const;
 };

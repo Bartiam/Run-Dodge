@@ -9,7 +9,7 @@ void ARADHUDCastle_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	// Create widget
-	widgetBeforeGame = CreateWidget<URADUIBeforeStartGame_Base>(GetWorld(), widgetBeforeGame_Class);
+	widgetBeforeGame = CreateWidget<UUserWidget>(GetWorld(), widgetBeforeGame_Class);
 	// Add widget to viewport
 	widgetBeforeGame->AddToViewport();
 }
@@ -44,7 +44,7 @@ UUserWidget* ARADHUDCastle_Base::GetWidgetEndGame() const
 	return widgetEndGame;
 }
 
-URADUIBeforeStartGame_Base* ARADHUDCastle_Base::GetWidgetBeforeGame() const
+UUserWidget* ARADHUDCastle_Base::GetWidgetBeforeGame() const
 {
 	return widgetBeforeGame;
 }

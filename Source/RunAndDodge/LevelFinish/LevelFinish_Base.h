@@ -25,6 +25,8 @@ private: // Private variables
 
 	class USceneComponent* rootComponent = nullptr;
 
+	class ARADCastleGameMode_Base* gameMode = nullptr;
+
 public: // Public variables
 
 	// Gate meshes

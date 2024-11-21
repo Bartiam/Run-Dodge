@@ -17,6 +17,8 @@ void ARADCastleGameState_Base::BeginPlay()
 	gameInstance = Cast<URADGameInstance_Base>(GetGameInstance());
 	character = Cast<ARADCharacter_Base>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 	gameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
+
+	LoadRADGame();
 }
 
 void ARADCastleGameState_Base::SetCurrentTimeSinceBeginLevel()

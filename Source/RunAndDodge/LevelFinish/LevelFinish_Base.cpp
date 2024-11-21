@@ -2,10 +2,12 @@
 
 
 #include "LevelFinish_Base.h"
+#include "../GameModes/RADCastleGameMode_Base.h"
 
 #include "Components/SceneComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ALevelFinish_Base::ALevelFinish_Base()
@@ -41,10 +43,11 @@ void ALevelFinish_Base::BeginPlay()
 	Super::BeginPlay();
 	
 	overlapCollision->OnComponentBeginOverlap.AddDynamic(this, &ALevelFinish_Base::FinishLevel);
+	gameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
 }
 
 void ALevelFinish_Base::FinishLevel(UPrimitiveComponent* overlapComp, AActor* otherActor, 
 	UPrimitiveComponent* otherComp, int32 indexActor, bool bIsSweep, const FHitResult& hitResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Black, FString(TEXT("      !!!")));
+	gameMode->WonLevel();
 }
