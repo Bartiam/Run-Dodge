@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,6 +15,8 @@ private: // Private virables
 	TMap<FString, float> levels;
 	// The best time in endless mode
 	float firstLevelBestTime = 0.f;
+
+	FString firstLevelName = FString("Вход в замок");
 
 public: // Getters and Setters
 
