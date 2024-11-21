@@ -31,7 +31,7 @@ public: // Public variables
 	virtual void Tick(float DeltaTime) override;
 
 	// crossbow mesh
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Crossbow")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Crossbow")
 	UStaticMeshComponent* crossbow = nullptr;
 
 	// Collisiton for looking character
