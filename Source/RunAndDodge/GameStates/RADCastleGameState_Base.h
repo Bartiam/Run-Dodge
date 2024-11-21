@@ -40,12 +40,6 @@ private: // Private functions
 	UFUNCTION()
 	void SetCurrentTimeSinceBeginLevel();
 
-	UFUNCTION()
-	void SaveRADGame();
-
-	UFUNCTION()
-	void LoadRADGame();
-
 public: // Public functions
 
 	// return elapes time since begin play

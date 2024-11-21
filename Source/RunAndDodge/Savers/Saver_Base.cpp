@@ -2,8 +2,3 @@
 
 
 #include "Saver_Base.h"
-
-USaver_Base::USaver_Base() : Super()
-{
-
-}

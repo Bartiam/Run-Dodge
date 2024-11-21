@@ -4,19 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
+#include "../FunctionLib/MyTypes_Base.h"
+
 #include "Saver_Base.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class RUNANDDODGE_API USaver_Base : public USaveGame
 {
 	GENERATED_BODY()
 
-	USaver_Base();
-
 public: // Public variables to save
-	
-	TMap<FString, float> saveLevels;
+
+	TArray<float> theBestLevelTimes;
+
+	FString saveProfileName = "MainProfile";
 };

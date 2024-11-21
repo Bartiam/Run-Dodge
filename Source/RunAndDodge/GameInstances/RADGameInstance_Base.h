@@ -4,7 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "../FunctionLib/MyTypes_Base.h"
+
 #include "RADGameInstance_Base.generated.h"
+
+class USaver_Base;
 
 UCLASS()
 class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
@@ -12,11 +16,9 @@ class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 	GENERATED_BODY()
 
 private: // Private virables
-	TMap<FString, float> infoAboutLevels;
-	// The best time in endless mode
-	float firstLevelBestTime = 0.f;
 
-	FString firstLevelName = FString(TEXT("Вход в замок"));
+	TArray<FString> levelNames = { FString(TEXT("Вход в замок")) };
+	TArray<float> levelBestTimes = { 0.f };
 
 public: // Getters and Setters
 
@@ -28,10 +30,19 @@ public: // Getters and Setters
 	UFUNCTION()
 	void SetTheBestLevelTime(const float& newTime);
 
-	// Getter name level
+	// Getter name current level
+	UFUNCTION()
 	FString GetNameCurrentLevel();
 
 public: // Public variables
 
 	bool bIsNewRecord = false;
+
+public: // Public functions
+
+	UFUNCTION(BlueprintCallable)
+	void SaveRADGame();
+
+	UFUNCTION(BlueprintCallable)
+	void LoadRADGame();
 };
