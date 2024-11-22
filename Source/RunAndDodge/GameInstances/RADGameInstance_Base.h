@@ -44,6 +44,7 @@ public: // Getters and Setters
 
 public: // Public variables
 
+	UPROPERTY(BlueprintReadWrite)
 	bool bIsNewRecord = false;
 
 public: // Public functions

@@ -30,7 +30,7 @@ FString URADUIBeforeStartGame_Base::GetLevelName()
 
 FString URADUIBeforeStartGame_Base::GetTextBestTime()
 {
-	FString result = FString(TEXT("Лучшее время: "));
+	FString result = FString(TEXT("Лучший забег: "));
 
 	if (gameInstance->bIsNewRecord)
 		result = FString(TEXT("НОВЫЙ РЕКОРД!"));
