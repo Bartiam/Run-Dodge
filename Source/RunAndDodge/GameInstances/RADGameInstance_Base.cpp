@@ -7,14 +7,14 @@
 
 float URADGameInstance_Base::GetTheBestLevelTime() const
 {
-	return levelBestTimes[0];
+	return levelBestTimes[indexLevel - 1];
 }
 
 void URADGameInstance_Base::SetTheBestLevelTime(const float& newTime)
 {
-	if (levelBestTimes[0] <= 0.f || newTime < levelBestTimes[0])
+	if (levelBestTimes[indexLevel - 1] <= 0.f || newTime < levelBestTimes[indexLevel - 1])
 	{
-		levelBestTimes[0] = newTime;
+		levelBestTimes[indexLevel - 1] = newTime;
 		bIsNewRecord = true;
 		SaveRADGame();
 	}
@@ -22,7 +22,12 @@ void URADGameInstance_Base::SetTheBestLevelTime(const float& newTime)
 
 FString URADGameInstance_Base::GetNameCurrentLevel()
 {
-	return levelNames[0];
+	return levelNames[indexLevel - 1];
+}
+
+void URADGameInstance_Base::SetIndexLevel(int newIndex)
+{
+	indexLevel = newIndex;
 }
 
 void URADGameInstance_Base::SaveRADGame()

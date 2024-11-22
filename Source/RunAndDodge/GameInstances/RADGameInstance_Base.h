@@ -19,6 +19,7 @@ class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 private: // Private virables
 
 	FString profileName = FString(TEXT("ProfileOne"));
+	int indexLevel = 0;
 
 	TArray<FString> levelNames = { FString(TEXT("Вход в замок")) };
 	TArray<float> levelBestTimes = { 0.f };
@@ -36,6 +37,10 @@ public: // Getters and Setters
 	// Getter name current level
 	UFUNCTION()
 	FString GetNameCurrentLevel();
+
+	// Setter index current level
+	UFUNCTION(BlueprintCallable)
+	void SetIndexLevel(int newIndex);
 
 public: // Public variables
 
