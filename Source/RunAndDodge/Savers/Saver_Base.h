@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
-#include "../FunctionLib/MyTypes_Base.h"
-
 #include "Saver_Base.generated.h"
 
 
@@ -16,7 +14,6 @@ class RUNANDDODGE_API USaver_Base : public USaveGame
 
 public: // Public variables to save
 
-	TArray<float> theBestLevelTimes;
-
-	FString saveProfileName = "MainProfile";
+	UPROPERTY(SaveGame)
+	TArray<float> theBestLevelTimes = { 28.f };
 };

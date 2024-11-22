@@ -4,7 +4,6 @@
 #include "RADGameInstance_Base.h"
 
 #include "Kismet/GameplayStatics.h"
-#include "../Savers/Saver_Base.h"
 
 float URADGameInstance_Base::GetTheBestLevelTime() const
 {
@@ -16,6 +15,7 @@ void URADGameInstance_Base::SetTheBestLevelTime(const float& newTime)
 	if (levelBestTimes[0] <= 0.f || newTime < levelBestTimes[0])
 	{
 		levelBestTimes[0] = newTime;
+		bIsNewRecord = true;
 		SaveRADGame();
 	}
 }
@@ -27,17 +27,13 @@ FString URADGameInstance_Base::GetNameCurrentLevel()
 
 void URADGameInstance_Base::SaveRADGame()
 {
-	USaver_Base* RADSaver = Cast<USaver_Base>(UGameplayStatics::CreateSaveGameObject(USaver_Base::StaticClass()));
+	auto RADSaver = Cast<USaver_Base>(UGameplayStatics::CreateSaveGameObject(USaver_Base::StaticClass()));
 	RADSaver->theBestLevelTimes = levelBestTimes;
-	UGameplayStatics::SaveGameToSlot(RADSaver, RADSaver->saveProfileName, 0);
+	UGameplayStatics::SaveGameToSlot(RADSaver, profileName, 0);
 }
 
 void URADGameInstance_Base::LoadRADGame()
 {
-	USaver_Base* RADSaver = Cast<USaver_Base>(UGameplayStatics::CreateSaveGameObject(USaver_Base::StaticClass()));
-	RADSaver = Cast<USaver_Base>(UGameplayStatics::LoadGameFromSlot(RADSaver->saveProfileName, 0));
-	if (RADSaver)
-		levelBestTimes = RADSaver->theBestLevelTimes;
-	else
-	SaveRADGame();
+	auto RADSaver = Cast<USaver_Base>(UGameplayStatics::LoadGameFromSlot(profileName, 0));
+	levelBestTimes = RADSaver->theBestLevelTimes;
 }

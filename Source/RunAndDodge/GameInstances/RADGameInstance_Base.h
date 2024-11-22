@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "../FunctionLib/MyTypes_Base.h"
+#include "../Savers/Saver_Base.h"
 
 #include "RADGameInstance_Base.generated.h"
 
@@ -16,6 +17,8 @@ class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 	GENERATED_BODY()
 
 private: // Private virables
+
+	FString profileName = FString(TEXT("ProfileOne"));
 
 	TArray<FString> levelNames = { FString(TEXT("Вход в замок")) };
 	TArray<float> levelBestTimes = { 0.f };
