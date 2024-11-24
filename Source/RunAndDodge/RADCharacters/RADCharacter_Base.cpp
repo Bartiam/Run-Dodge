@@ -29,7 +29,7 @@ ARADCharacter_Base::ARADCharacter_Base()
 	GetCharacterMovement()->MaxWalkSpeed = characterSpeed.simpleRunSpeed;
 	GetCharacterMovement()->MaxWalkSpeedCrouched = characterSpeed.crouchSpeed;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
-	GetCharacterMovement()->JumpZVelocity = 500.f;
+	GetCharacterMovement()->JumpZVelocity = 530.f;
 	GetCharacterMovement()->CrouchedHalfHeight = 88.f;
 
 	// Create spring arm
@@ -157,4 +157,17 @@ void ARADCharacter_Base::CharacterDied()
 	GetMesh()->SetSimulatePhysics(true);
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	springArm->bDoCollisionTest = false;
+}
+
+void ARADCharacter_Base::CharacterCrouch()
+{
+	Crouch();
+	GetCharacterMovement()->CrouchedHalfHeight = 40.f;
+	UpdateMovementState();
+}
+
+void ARADCharacter_Base::CharacterUnCrouch()
+{
+	UnCrouch();
+	UpdateMovementState();
 }

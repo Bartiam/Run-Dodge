@@ -90,4 +90,10 @@ public: // Public functions
 
 	UFUNCTION()
 	void CharacterDied();
+
+	UFUNCTION()
+	void CharacterCrouch();
+
+	UFUNCTION()
+	void CharacterUnCrouch();
 };

@@ -133,14 +133,12 @@ void ARAD_PlayerController_Base::SprintStopped()
 
 void ARAD_PlayerController_Base::CrouchCharacter()
 {
-	character->Crouch();
-	character->UpdateMovementState();
+	character->CharacterCrouch();
 }
 
 void ARAD_PlayerController_Base::CrouchStopped()
 {
-	character->UnCrouch();
-	character->UpdateMovementState();
+	character->CharacterUnCrouch();
 }
 
 void ARAD_PlayerController_Base::WalkingCharacter()
