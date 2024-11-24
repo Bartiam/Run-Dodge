@@ -18,21 +18,21 @@ class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 
 private: // Private virables
 
-	FString profileName = FString(TEXT("ProfileOne"));
+	FString profileName = FString(TEXT("MainProfile"));
 	int indexLevel = 0;
 
 	TArray<FString> levelNames = { FString(TEXT("Вход в замок")) };
-	TArray<float> levelBestTimes = { 0.f };
+	TArray<int> levelBestTimes = { 0 };
 
 public: // Getters and Setters
 
 	// Getter the best time
 	UFUNCTION()
-	float GetTheBestLevelTime() const;
+	int GetTheBestLevelTime() const;
 
 	// Setter the best time
 	UFUNCTION()
-	void SetTheBestLevelTime(const float& newTime);
+	void SetTheBestLevelTime(const int& newTime);
 
 	// Getter name current level
 	UFUNCTION()

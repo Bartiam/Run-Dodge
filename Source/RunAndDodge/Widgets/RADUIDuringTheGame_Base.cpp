@@ -35,7 +35,7 @@ float URADUIDuringTheGame_Base::GetCurrentStamina() const
 	return 0.f;
 }
 
-float URADUIDuringTheGame_Base::GetCurrentTime() const
+FString URADUIDuringTheGame_Base::GetCurrentTime() const
 {
-	return gameState->GetCurrentTimeSinceBeginLevel();
+	return FString::FromInt(gameState->GetCurrentTimeSinceBeginLevel());
 }

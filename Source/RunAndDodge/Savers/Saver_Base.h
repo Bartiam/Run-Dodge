@@ -15,5 +15,5 @@ class RUNANDDODGE_API USaver_Base : public USaveGame
 public: // Public variables to save
 
 	UPROPERTY(SaveGame)
-	TArray<float> theBestLevelTimes = { 28.f };
+	TArray<int> theBestLevelTimes;
 };

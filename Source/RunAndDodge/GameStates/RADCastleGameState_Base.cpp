@@ -21,16 +21,16 @@ void ARADCastleGameState_Base::BeginPlay()
 
 void ARADCastleGameState_Base::SetCurrentTimeSinceBeginLevel()
 {
-	currentTime += 0.1f;
+	currentTime += 1;
 }
 
-float ARADCastleGameState_Base::GetCurrentTimeSinceBeginLevel() const
+int ARADCastleGameState_Base::GetCurrentTimeSinceBeginLevel() const
 { return currentTime; }
 
 void ARADCastleGameState_Base::StartGame()
 {
 	playerController->SetControlSettings(gameMode->bIsGameOver, gameMode->bIsWonLevel);
-	GetWorldTimerManager().SetTimer(timeElapsedSinceBeginLevel, this, &ARADCastleGameState_Base::SetCurrentTimeSinceBeginLevel, 0.1f, true);
+	GetWorldTimerManager().SetTimer(timeElapsedSinceBeginLevel, this, &ARADCastleGameState_Base::SetCurrentTimeSinceBeginLevel, 1, true);
 }
 
 void ARADCastleGameState_Base::GameOver()

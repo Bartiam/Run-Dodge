@@ -21,7 +21,7 @@ private: // Private variables
 
 	FTimerHandle timeElapsedSinceBeginLevel;
 
-	float currentTime = 0.f;
+	int currentTime = 0.f;
 
 	UPROPERTY()
 	class ARAD_PlayerController_Base* playerController = nullptr;
@@ -44,7 +44,7 @@ public: // Public functions
 
 	// return elapes time since begin play
 	UFUNCTION()
-	float GetCurrentTimeSinceBeginLevel() const;
+	int GetCurrentTimeSinceBeginLevel() const;
 
 	UFUNCTION()
 	void StartGame();

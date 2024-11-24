@@ -5,12 +5,12 @@
 
 #include "Kismet/GameplayStatics.h"
 
-float URADGameInstance_Base::GetTheBestLevelTime() const
+int URADGameInstance_Base::GetTheBestLevelTime() const
 {
 	return levelBestTimes[indexLevel - 1];
 }
 
-void URADGameInstance_Base::SetTheBestLevelTime(const float& newTime)
+void URADGameInstance_Base::SetTheBestLevelTime(const int& newTime)
 {
 	if (levelBestTimes[indexLevel - 1] <= 0.f || newTime < levelBestTimes[indexLevel - 1])
 	{
@@ -40,5 +40,6 @@ void URADGameInstance_Base::SaveRADGame()
 void URADGameInstance_Base::LoadRADGame()
 {
 	auto RADSaver = Cast<USaver_Base>(UGameplayStatics::LoadGameFromSlot(profileName, 0));
-	levelBestTimes = RADSaver->theBestLevelTimes;
+	if (RADSaver)
+		levelBestTimes = RADSaver->theBestLevelTimes;
 }

@@ -49,5 +49,6 @@ void ALevelFinish_Base::BeginPlay()
 void ALevelFinish_Base::FinishLevel(UPrimitiveComponent* overlapComp, AActor* otherActor, 
 	UPrimitiveComponent* otherComp, int32 indexActor, bool bIsSweep, const FHitResult& hitResult)
 {
-	gameMode->WonLevel();
+	if (otherActor->ActorHasTag(FName(TEXT("Player"))))
+		gameMode->WonLevel();
 }

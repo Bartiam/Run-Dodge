@@ -31,7 +31,7 @@ public:
 	float GetCurrentStamina() const;
 	// Getter for current time
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	float GetCurrentTime() const;
+	FString GetCurrentTime() const;
 	// Event character tired
 	UFUNCTION(BlueprintImplementableEvent)
 	void CharacterIsTired();
