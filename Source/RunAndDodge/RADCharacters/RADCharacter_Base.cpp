@@ -161,9 +161,12 @@ void ARADCharacter_Base::CharacterDied()
 
 void ARADCharacter_Base::CharacterCrouch()
 {
-	Crouch();
-	GetCharacterMovement()->CrouchedHalfHeight = 40.f;
-	UpdateMovementState();
+	if (!GetCharacterMovement()->IsFalling())
+	{
+		Crouch();
+		GetCharacterMovement()->CrouchedHalfHeight = 40.f;
+		UpdateMovementState();
+	}
 }
 
 void ARADCharacter_Base::CharacterUnCrouch()

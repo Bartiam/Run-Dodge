@@ -28,7 +28,8 @@ ACatapult_Base::ACatapult_Base()
 void ACatapult_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	GetDirectionTurn();
+	if (catapultSettings.bIsCanTurn)
+		GetDirectionTurn();
 	skeletalMesh->PlayAnimation(catapultSettings.shotAnimation, true);
 }
 
@@ -46,7 +47,8 @@ void ACatapult_Base::ShotCatapult()
 	auto vectorImpulse = FVector(GetActorForwardVector().X * currentForwardPower, GetActorForwardVector().Y * currentForwardPower, GetActorForwardVector().Z + currentThrowUpPower);
 	projectile->projectileMesh->AddImpulse(vectorImpulse);
 
-	GetDirectionTurn();
+	if (catapultSettings.bIsCanTurn)
+		GetDirectionTurn();
 }
 
 void ACatapult_Base::ReloadCatapult()
@@ -86,8 +88,8 @@ void ACatapult_Base::GetDirectionTurn()
 {
 	bIsTurnPositiveOrNegative = UKismetMathLibrary::RandomBool();
 
-	if (currentRotateNumber == 30) bIsTurnPositiveOrNegative = false;
-	if (currentRotateNumber == -30) bIsTurnPositiveOrNegative = true;
+	if (currentRotateNumber == catapultSettings.maxRotationCatapult) bIsTurnPositiveOrNegative = false;
+	if (currentRotateNumber == - catapultSettings.maxRotationCatapult) bIsTurnPositiveOrNegative = true;
 
 	GetWorldTimerManager().SetTimer(timerToRotateCatapult, this, &ACatapult_Base::RotateCatapult, 0.1f, true);
 }

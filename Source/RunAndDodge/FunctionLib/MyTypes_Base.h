@@ -90,6 +90,10 @@ struct FCatapultSpecification
 	FVector projectileScale = FVector::Zero();
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
 	float projectileDamage = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	bool bIsCanTurn = false;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	float maxRotationCatapult = 0.f;
 };
 
 UCLASS()

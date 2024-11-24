@@ -60,7 +60,9 @@ void AProjectile_Base::HandleBeginOverlap(UPrimitiveComponent* hitComponent, AAc
 		UGameplayStatics::ApplyDamage(otherActorHit, damage, GetInstigatorController(), this, damageTypeClass);
 	}
 
-	if (!otherActorHit->ActorHasTag(FName(TEXT("Crossbow"))) && !otherActorHit->ActorHasTag(FName(TEXT("Projectile"))))
+	if (!otherActorHit->ActorHasTag(FName(TEXT("Crossbow"))) && 
+		!otherActorHit->ActorHasTag(FName(TEXT("Projectile"))) &&
+		!otherActorHit->ActorHasTag(FName(TEXT("Bolt"))))
 	{
 		damage -= 50.f;
 		if (damage <= 0.f)
