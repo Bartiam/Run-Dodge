@@ -5,6 +5,16 @@
 
 #include "Kismet/GameplayStatics.h"
 
+float URADGameInstance_Base::GetCurrentSensitivity() const
+{
+	return currentSensitivity;
+}
+
+void URADGameInstance_Base::SetCurrentSensitivity(float newSensitivity)
+{
+	currentSensitivity = newSensitivity;
+}
+
 int URADGameInstance_Base::GetTheBestLevelTime() const
 {
 	return levelBestTimes[indexLevel - 1];
@@ -34,6 +44,7 @@ void URADGameInstance_Base::SaveRADGame()
 {
 	auto RADSaver = Cast<USaver_Base>(UGameplayStatics::CreateSaveGameObject(USaver_Base::StaticClass()));
 	RADSaver->theBestLevelTimes = levelBestTimes;
+	RADSaver->sensitivity = currentSensitivity;
 	UGameplayStatics::SaveGameToSlot(RADSaver, profileName, 0);
 }
 
@@ -41,5 +52,8 @@ void URADGameInstance_Base::LoadRADGame()
 {
 	auto RADSaver = Cast<USaver_Base>(UGameplayStatics::LoadGameFromSlot(profileName, 0));
 	if (RADSaver)
+	{
+		currentSensitivity = RADSaver->sensitivity;
 		levelBestTimes = RADSaver->theBestLevelTimes;
+	}
 }

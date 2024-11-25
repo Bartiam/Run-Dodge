@@ -6,6 +6,7 @@
 #include "../HUDs/RADHUDCastle_Base.h"
 #include "../Widgets/RADUIDuringTheGame_Base.h"
 #include "../Widgets/RADUIBeforeStartGame_Base.h"
+#include "../GameInstances/RADGameInstance_Base.h"
 
 #include "EnhancedInput/Public/EnhancedInputComponent.h"
 #include "InputAction.h"
@@ -25,16 +26,17 @@ void ARAD_PlayerController_Base::BeginPlay()
 		subSystem->AddMappingContext(inputMappingContext, 0);
 	}
 
+	gameInstance = Cast<URADGameInstance_Base>(GetGameInstance());
 	character = Cast<ARADCharacter_Base>(GetPawn());
 	HUD = Cast<ARADHUDCastle_Base>(GetHUD());
+
+	gameSensitivity = gameInstance->GetCurrentSensitivity();
 }
 
 void ARAD_PlayerController_Base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
-
-
 
 void ARAD_PlayerController_Base::SetupInputComponent()
 {
@@ -108,8 +110,8 @@ void ARAD_PlayerController_Base::LookCharacter(const FInputActionValue& value)
 {
 	const FVector2D lookAxisVector = value.Get<FVector2D>();
 
-	AddYawInput(lookAxisVector.X);
-	AddPitchInput(lookAxisVector.Y);
+	AddYawInput(lookAxisVector.X * gameSensitivity * GetWorld()->DeltaTimeSeconds);
+	AddPitchInput(lookAxisVector.Y * gameSensitivity * GetWorld()->DeltaTimeSeconds);
 }
 
 void ARAD_PlayerController_Base::SprintCharacter()

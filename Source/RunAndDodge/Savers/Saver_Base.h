@@ -16,4 +16,7 @@ public: // Public variables to save
 
 	UPROPERTY(SaveGame)
 	TArray<int> theBestLevelTimes;
+
+	UPROPERTY(SaveGame)
+	float sensitivity;
 };

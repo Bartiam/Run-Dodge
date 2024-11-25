@@ -83,11 +83,14 @@ private: // Private functions
 
 private: // Private variables
 
+	float gameSensitivity = 0.f;
+
 	FInputModeGameAndUI inputGameAndUI;
 	FInputModeGameOnly inputGameOnly;
 
 	class ARADCharacter_Base* character = nullptr;
 	ARADHUDCastle_Base* HUD = nullptr;
+	class URADGameInstance_Base* gameInstance = nullptr;
 
 	FTimerHandle timerToAccelirationRun;
 

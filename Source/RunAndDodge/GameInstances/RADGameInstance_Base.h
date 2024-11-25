@@ -20,11 +20,20 @@ private: // Private virables
 
 	FString profileName = FString(TEXT("MainProfile"));
 	int indexLevel = 0;
+	float currentSensitivity = 100.f;
 
 	TArray<FString> levelNames = { FString(TEXT("Вход в замок")) };
 	TArray<int> levelBestTimes = { 0 };
 
 public: // Getters and Setters
+
+	// Getter current sensitivity
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetCurrentSensitivity() const;
+
+	// Setter current sensitivity
+	UFUNCTION(BlueprintCallable)
+	void SetCurrentSensitivity(float newSensitivity);
 
 	// Getter the best time
 	UFUNCTION()
