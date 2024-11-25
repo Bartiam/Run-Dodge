@@ -95,9 +95,12 @@ void ACrossbow_Base::HandleEndOverlap(UPrimitiveComponent* overlappedComponent,
 
 void ACrossbow_Base::ShootBolt()
 {
-	bolt->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-	bolt->bIsShoot = true;
-	GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, crossbowSettings.timeReload, false);
+	if (IsValid(bolt))
+	{
+		bolt->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		bolt->bIsShoot = true;
+		GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, crossbowSettings.timeReload, false);
+	}
 }
 
 void ACrossbow_Base::ReloadCrossbow()

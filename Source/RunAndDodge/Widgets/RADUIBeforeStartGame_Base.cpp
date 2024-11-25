@@ -12,7 +12,7 @@ void URADUIBeforeStartGame_Base::NativeConstruct()
 FString URADUIBeforeStartGame_Base::GetTheBestTimeThisLevel()
 {
 	auto tempVar = gameInstance->GetTheBestLevelTime();
-	FString result = FString::SanitizeFloat(tempVar);
+	FString result = FString::FromInt(tempVar);
 
 	if (tempVar <= 0.f)
 	{

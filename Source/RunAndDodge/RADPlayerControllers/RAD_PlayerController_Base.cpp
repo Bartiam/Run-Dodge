@@ -176,6 +176,7 @@ void ARAD_PlayerController_Base::SetControlSettings(const bool& bIsGameEnded, co
 		HUD->CreateWonGameWidget();
 		SetInputMode(inputGameAndUI);
 		SetShowMouseCursor(true);
+		SetPause(true);
 	}
 	else
 	{
