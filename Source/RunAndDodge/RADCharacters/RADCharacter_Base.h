@@ -31,6 +31,8 @@ public:
 
 private: // Private variables
 
+	bool bIsCharacterCrouched = false;
+
 	bool bIsCharacterDied = false;
 
 	// Character camera component

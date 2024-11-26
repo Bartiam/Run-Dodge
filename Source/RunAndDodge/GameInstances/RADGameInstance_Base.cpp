@@ -40,11 +40,22 @@ void URADGameInstance_Base::SetIndexLevel(int newIndex)
 	indexLevel = newIndex;
 }
 
+bool URADGameInstance_Base::GetLearningEnabled() const
+{
+	return bIsLearningEnabled;
+}
+
+void URADGameInstance_Base::SetLearningEnabled(bool bIsEnabled)
+{
+	bIsLearningEnabled = bIsEnabled;
+}
+
 void URADGameInstance_Base::SaveRADGame()
 {
 	auto RADSaver = Cast<USaver_Base>(UGameplayStatics::CreateSaveGameObject(USaver_Base::StaticClass()));
 	RADSaver->theBestLevelTimes = levelBestTimes;
 	RADSaver->sensitivity = currentSensitivity;
+	RADSaver->bIsLearningEnabled = bIsLearningEnabled;
 	UGameplayStatics::SaveGameToSlot(RADSaver, profileName, 0);
 }
 
@@ -55,5 +66,6 @@ void URADGameInstance_Base::LoadRADGame()
 	{
 		currentSensitivity = RADSaver->sensitivity;
 		levelBestTimes = RADSaver->theBestLevelTimes;
+		bIsLearningEnabled = RADSaver->bIsLearningEnabled;
 	}
 }

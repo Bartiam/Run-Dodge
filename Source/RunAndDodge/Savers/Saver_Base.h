@@ -19,4 +19,7 @@ public: // Public variables to save
 
 	UPROPERTY(SaveGame)
 	float sensitivity;
+
+	UPROPERTY(SaveGame)
+	bool bIsLearningEnabled;
 };

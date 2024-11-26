@@ -20,10 +20,14 @@ private: // Private virables
 
 	FString profileName = FString(TEXT("MainProfile"));
 	int indexLevel = 0;
+
+	// Save variables //
 	float currentSensitivity = 100.f;
+	TArray<int> levelBestTimes = { 0 };
+	bool bIsLearningEnabled = true;
+	// =================================== //
 
 	TArray<FString> levelNames = { FString(TEXT("Вход в замок")) };
-	TArray<int> levelBestTimes = { 0 };
 
 public: // Getters and Setters
 
@@ -50,6 +54,14 @@ public: // Getters and Setters
 	// Setter index current level
 	UFUNCTION(BlueprintCallable)
 	void SetIndexLevel(int newIndex);
+
+	// Getter learning enabled
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool GetLearningEnabled() const;
+
+	// Setter learning enabled
+	UFUNCTION(BlueprintCallable)
+	void SetLearningEnabled(bool bIsEnabled);
 
 public: // Public variables
 

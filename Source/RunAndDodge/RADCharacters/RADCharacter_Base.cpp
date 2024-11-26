@@ -142,7 +142,8 @@ void ARADCharacter_Base::UpdateMovementState()
 void ARADCharacter_Base::CharacterJumping()
 {
 	if (!GetCharacterMovement()->IsFalling() && 
-		staminaComponent->GetCurrentStamina() > staminaComponent->staminaSpentOnJump)
+		staminaComponent->GetCurrentStamina() > staminaComponent->staminaSpentOnJump &&
+		!bIsCharacterCrouched)
 	{
 		Jump();
 		bIsCharacterJump = true;
@@ -163,6 +164,7 @@ void ARADCharacter_Base::CharacterCrouch()
 {
 	if (!GetCharacterMovement()->IsFalling())
 	{
+		bIsCharacterCrouched = true;
 		Crouch();
 		GetCharacterMovement()->CrouchedHalfHeight = 40.f;
 		UpdateMovementState();
@@ -171,6 +173,7 @@ void ARADCharacter_Base::CharacterCrouch()
 
 void ARADCharacter_Base::CharacterUnCrouch()
 {
+	bIsCharacterCrouched = false;
 	UnCrouch();
 	UpdateMovementState();
 }
