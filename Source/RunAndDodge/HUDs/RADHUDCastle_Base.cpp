@@ -48,3 +48,9 @@ UUserWidget* ARADHUDCastle_Base::GetWidgetBeforeGame() const
 {
 	return widgetBeforeGame;
 }
+
+void ARADHUDCastle_Base::CreateLearningWidget()
+{
+	auto learningWidget = CreateWidget<UUserWidget>(GetWorld(), learningWidget_Class);
+	learningWidget->AddToViewport();
+}
