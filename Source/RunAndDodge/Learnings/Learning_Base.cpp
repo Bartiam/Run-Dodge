@@ -5,6 +5,7 @@
 #include "../GameInstances/RADGameInstance_Base.h"
 
 #include "Components/BoxComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Blueprint/UserWidget.h"
 
 // Sets default values
@@ -40,9 +41,9 @@ void ALearning_Base::HandleBeginOverlap(UPrimitiveComponent* hitComponent, AActo
 {
 	if (otherActor->ActorHasTag(FName(TEXT("Player"))))
 	{
-		auto learningWidget = CreateWidget<UUserWidget>(learningWidget_Class);
+		auto learningWidget = CreateWidget<UUserWidget>(GetWorld(), learningWidget_Class);
 		learningWidget->AddToViewport();
+		UGameplayStatics::SetGamePaused(GetWorld(), true);
 		Destroy();
 	}
 }
-

@@ -35,5 +35,5 @@ public: // Public variables
 	class UBoxComponent* lookingCollision = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Learning widget")
-	class UUserWidget* learningWidget_Class;
+	TSubclassOf<class UUserWidget> learningWidget_Class;
 };

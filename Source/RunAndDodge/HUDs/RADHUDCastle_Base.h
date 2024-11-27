@@ -49,14 +49,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
 	TSubclassOf<URADUIBeforeStartGame_Base> widgetWonLevel_Class;
 
-	// Classes learning widget ================================= //
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Learning Widget")
-	TSubclassOf<UUserWidget> learningWidget_Class;
-
-	// ===========================================================// 
-
-
 	UFUNCTION()
 	void CreateWidgetDuringTheGame();
 
@@ -72,10 +64,4 @@ public:
 	UUserWidget* GetWidgetEndGame() const;
 	// Getter widget before game
 	UUserWidget* GetWidgetBeforeGame() const;
-
-	// Create widget for learning
-
-	void CreateLearningWidget();
-
-	// ======================= //
 };
