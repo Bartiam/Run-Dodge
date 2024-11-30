@@ -63,6 +63,10 @@ private: // Private variables
 
 	class ARADCastleGameMode_Base* currentGameMode = nullptr;
 
+	UAudioComponent* shotAudionComponent = nullptr;
+
+	UAudioComponent* reloadAudioComponent = nullptr;
+
 public: // Public functions
 
 	UFUNCTION()

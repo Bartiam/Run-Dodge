@@ -9,6 +9,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/SceneComponent.h"
+#include "Components/AudioComponent.h"
 
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
@@ -38,6 +39,14 @@ ACrossbow_Base::ACrossbow_Base()
 	// Create spawn collision
 	spawnCollision = CreateDefaultSubobject<UBoxComponent>(FName(TEXT("Spawn collision")));
 	spawnCollision->SetupAttachment(crossbow);
+
+	// Create shot audio component
+	shotAudionComponent = CreateDefaultSubobject<UAudioComponent>(FName(TEXT("Shot audio")));
+	shotAudionComponent->SetupAttachment(RootComponent);
+
+	// Create relooad audion component
+	reloadAudioComponent = CreateDefaultSubobject<UAudioComponent>(FName(TEXT("Reload audion")));
+	reloadAudioComponent->SetupAttachment(RootComponent);
 
 	// Add tag
 	Tags.Add(FName(TEXT("Crossbow")));
@@ -97,8 +106,12 @@ void ACrossbow_Base::ShootBolt()
 {
 	if (IsValid(bolt))
 	{
+		shotAudionComponent->Sound = crossbowSettings.shotSound;
+		shotAudionComponent->Play();
 		bolt->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		bolt->bIsShoot = true;
+		reloadAudioComponent->Sound = crossbowSettings.reloadSound;
+		reloadAudioComponent->Play();
 		GetWorldTimerManager().SetTimer(timerToReload, this, &ACrossbow_Base::ReloadCrossbow, crossbowSettings.timeReload, false);
 	}
 }
