@@ -25,6 +25,7 @@ private: // Private virables
 	float currentSensitivity = 100.f;
 	TArray<int> levelBestTimes = { 0 };
 	bool bIsLearningEnabled = true;
+	float musicVolume = 1.f;
 	// =================================== //
 
 	TArray<FString> levelNames = { FString(TEXT("Вход в замок")) };
@@ -62,6 +63,14 @@ public: // Getters and Setters
 	// Setter learning enabled
 	UFUNCTION(BlueprintCallable)
 	void SetLearningEnabled(bool bIsEnabled);
+
+	// Getter volume music
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	float GetCurrentMusicVolume() const;
+
+	// Setter volume music
+	UFUNCTION(BlueprintCallable)
+	void SetCurrentMusicVolume(float newMusicVolume);
 
 public: // Public variables
 

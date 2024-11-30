@@ -22,4 +22,7 @@ public: // Public variables to save
 
 	UPROPERTY(SaveGame)
 	bool bIsLearningEnabled;
+
+	UPROPERTY(SaveGame)
+	float musicVolume;
 };
