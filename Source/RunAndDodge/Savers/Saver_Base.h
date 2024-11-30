@@ -25,4 +25,7 @@ public: // Public variables to save
 
 	UPROPERTY(SaveGame)
 	float musicVolume;
+
+	UPROPERTY(SaveGame)
+	float soundVolume;
 };

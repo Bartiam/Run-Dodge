@@ -60,6 +60,16 @@ void URADGameInstance_Base::SetCurrentMusicVolume(float newMusicVolume)
 	musicVolume = newMusicVolume;
 }
 
+float URADGameInstance_Base::GetCurrentSoundVolume() const
+{
+	return soundsVolume;
+}
+
+void URADGameInstance_Base::SetCurrentSoundVolume(float newSoundVolume)
+{
+	soundsVolume = newSoundVolume;
+}
+
 void URADGameInstance_Base::SaveRADGame()
 {
 	auto RADSaver = Cast<USaver_Base>(UGameplayStatics::CreateSaveGameObject(USaver_Base::StaticClass()));
@@ -67,6 +77,7 @@ void URADGameInstance_Base::SaveRADGame()
 	RADSaver->sensitivity = currentSensitivity;
 	RADSaver->bIsLearningEnabled = bIsLearningEnabled;
 	RADSaver->musicVolume = musicVolume;
+	RADSaver->soundVolume = soundsVolume;
 	UGameplayStatics::SaveGameToSlot(RADSaver, profileName, 0);
 }
 
@@ -79,5 +90,6 @@ void URADGameInstance_Base::LoadRADGame()
 		levelBestTimes = RADSaver->theBestLevelTimes;
 		bIsLearningEnabled = RADSaver->bIsLearningEnabled;
 		musicVolume = RADSaver->musicVolume;
+		soundsVolume = RADSaver->soundVolume;
 	}
 }
