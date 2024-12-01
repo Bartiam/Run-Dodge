@@ -5,6 +5,7 @@
 
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -35,6 +36,9 @@ ASpike_Base::ASpike_Base()
 	// Set Collision
 	checkCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	checkCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
+	// Create audio component
+	spikeSoundAudioComponent = CreateDefaultSubobject<UAudioComponent>(FName(TEXT("Audio component")));
+	spikeSoundAudioComponent->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -65,6 +69,7 @@ void ASpike_Base::CheckBeginOverlap(UPrimitiveComponent* hitComponent, AActor* o
 
 void ASpike_Base::RiseUpSpike()
 {
+	spikeSoundAudioComponent->Play();
 	SetActorLocation(FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + raisUpByZ));
 	checkCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetWorldTimerManager().SetTimer(timerToRiseDown, this, &ASpike_Base::RiseDownSpike, 1.f, false);
@@ -72,6 +77,7 @@ void ASpike_Base::RiseUpSpike()
 
 void ASpike_Base::RiseDownSpike()
 {
+	spikeSoundAudioComponent->Play();
 	SetActorLocation(FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z - raisUpByZ));
 	checkCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }

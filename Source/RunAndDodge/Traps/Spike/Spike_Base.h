@@ -48,6 +48,9 @@ public: // Public variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Settings")
 	float raisUpByZ = 0.f;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UAudioComponent* spikeSoundAudioComponent = nullptr;
+
 private: // Private functions
 
 	UFUNCTION()
