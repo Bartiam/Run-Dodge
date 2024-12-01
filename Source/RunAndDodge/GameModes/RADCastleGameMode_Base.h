@@ -32,7 +32,7 @@ public: // Public functions
 
 	// Spawn object in object
 	UFUNCTION()
-	void SpawnObjectInObject(AActor* hitActor, AActor* otherHitActor);
+	void SpawnObjectInObject(ABolt_Base* hitActor, AActor* otherHitActor);
 
 	UFUNCTION(BlueprintCallable)
 	void StartGame();

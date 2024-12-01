@@ -9,6 +9,7 @@
 
 #include "GameFramework/GameUserSettings.h"
 #include "Kismet/GameplayStatics.h"
+#include "Components/AudioComponent.h"
 
 void ARADCastleGameMode_Base::BeginPlay()
 {
@@ -17,7 +18,7 @@ void ARADCastleGameMode_Base::BeginPlay()
 	RADGameState = Cast<ARADCastleGameState_Base>(GameState);
 }
 
-void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* otherHitActor)
+void ARADCastleGameMode_Base::SpawnObjectInObject(ABolt_Base* hitActor, AActor* otherHitActor)
 {
 	// If two bolts collide
 	if (otherHitActor->ActorHasTag(FName(TEXT("Bolt"))))
@@ -47,10 +48,12 @@ void ARADCastleGameMode_Base::SpawnObjectInObject(AActor* hitActor, AActor* othe
 		// Collision with a character
 		if (otherHitActor->ActorHasTag(FName(TEXT("Player"))))
 		{
-			//boltInObject->AttachToActor(otherHitActor, FAttachmentTransformRules::KeepWorldTransform);
 			character = Cast<ARADCharacter_Base>(otherHitActor);
 			boltInObject->AttachToComponent(character->GetMesh(), FAttachmentTransformRules::KeepWorldTransform);
 		}
+
+		boltInObject->InitBoltSettings(hitActor->boltSettings);
+		boltInObject->gotAnythingAudioComponent->Play();
 
 		hitActor->Destroy();
 	}

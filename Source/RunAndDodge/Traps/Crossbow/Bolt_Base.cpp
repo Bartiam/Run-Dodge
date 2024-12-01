@@ -3,6 +3,7 @@
 
 #include "Bolt_Base.h"
 #include "Components/BoxComponent.h"
+#include "Components/AudioComponent.h"
 
 #include "../../GameModes/RADCastleGameMode_Base.h"
 
@@ -18,6 +19,10 @@ ABolt_Base::ABolt_Base()
 	boltMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName(TEXT("Bolt")));
 	SetRootComponent(boltMesh);
 	boltMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+	// Create audio component
+	gotAnythingAudioComponent = CreateDefaultSubobject<UAudioComponent>(FName(TEXT("Got audio")));
+	gotAnythingAudioComponent->SetupAttachment(RootComponent);
+
 	// Add tag
 	Tags.Add(FName(TEXT("Bolt")));
 }
@@ -28,6 +33,7 @@ void ABolt_Base::BeginPlay()
 	Super::BeginPlay();
 
 	currentGameMode = Cast<ARADCastleGameMode_Base>(UGameplayStatics::GetGameMode(GetWorld()));
+	gotAnythingAudioComponent->Sound = boltSettings.boltGotSound;
 }
 
 // Called every frame
@@ -41,6 +47,7 @@ void ABolt_Base::Tick(float DeltaTime)
 void ABolt_Base::InitBoltSettings(const FBoltSpecification& boltInfo)
 {
 	boltSettings = boltInfo;
+	gotAnythingAudioComponent->Sound = boltSettings.boltGotSound;
 	SetActorScale3D(boltSettings.boltScale);
 	boltMesh->OnComponentHit.AddDynamic(this, &ABolt_Base::ComponentHit);
 }

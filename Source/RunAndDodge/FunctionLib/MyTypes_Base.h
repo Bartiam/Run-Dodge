@@ -50,6 +50,8 @@ struct FBoltSpecification
 	float boltSpeed = 0.f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bolt settings")
 	FVector boltScale = FVector::Zero();
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Bolt settings")
+	USoundBase* boltGotSound = nullptr;
 };
 
 // Structure for crossbow settings

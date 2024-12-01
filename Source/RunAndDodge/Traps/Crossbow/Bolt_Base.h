@@ -27,7 +27,7 @@ public:
 
 public: // Public variables
 
-	
+	UAudioComponent* gotAnythingAudioComponent = nullptr;
 
 public: // Public functions 
 
