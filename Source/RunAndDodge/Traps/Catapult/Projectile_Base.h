@@ -40,6 +40,9 @@ public: // Public variables
 	UFUNCTION()
 	void InitProjectile(const FVector& projectileScale, const float& projectileDamage);
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UAudioComponent* gotSoundComponent = nullptr;
+
 private: // Private functions
 
 	UFUNCTION()

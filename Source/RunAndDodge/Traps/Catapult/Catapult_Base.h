@@ -53,6 +53,9 @@ private: // Private variables
 	// The minimum possible turn
 	const int8 minTurnCatapult = -30;
 
+	UAudioComponent* shotAudioComponent = nullptr;
+	UAudioComponent* reloadAudioComponent = nullptr;
+
 public: // Public functions
 
 	// Releases the object giving it a boost
@@ -62,6 +65,9 @@ public: // Public functions
 	// Capturing an object and moving it in space
 	UFUNCTION(BlueprintCallable)
 	void ReloadCatapult();
+
+	UFUNCTION(BlueprintCallable)
+	void PlaySoundDuringShot();
 
 private: // Private functions
 

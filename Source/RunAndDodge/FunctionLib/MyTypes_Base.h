@@ -100,6 +100,10 @@ struct FCatapultSpecification
 	bool bIsCanTurn = false;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
 	float maxRotationCatapult = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	USoundBase* reloadSound = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Catapult settings")
+	USoundBase* shotSound = nullptr;
 };
 
 UCLASS()

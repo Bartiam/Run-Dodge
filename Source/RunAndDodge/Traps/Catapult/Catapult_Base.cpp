@@ -6,6 +6,7 @@
 
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/PrimitiveComponent.h"
+#include "Components/AudioComponent.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -22,6 +23,13 @@ ACatapult_Base::ACatapult_Base()
 	skeletalMesh->SetCollisionProfileName(FName(TEXT("BlockAll")));
 	// Create physics handle
 	physicsHandle = CreateDefaultSubobject<UPhysicsHandleComponent>(FName(TEXT("Physics handle")));
+
+	// Create audio components
+	shotAudioComponent = CreateDefaultSubobject<UAudioComponent>(FName(TEXT("Shot audio")));
+	shotAudioComponent->SetupAttachment(RootComponent);
+
+	reloadAudioComponent = CreateDefaultSubobject<UAudioComponent>(FName(TEXT("Reload audio")));
+	reloadAudioComponent->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -31,6 +39,9 @@ void ACatapult_Base::BeginPlay()
 	if (catapultSettings.bIsCanTurn)
 		GetDirectionTurn();
 	skeletalMesh->PlayAnimation(catapultSettings.shotAnimation, true);
+
+	shotAudioComponent->Sound = catapultSettings.shotSound;
+	reloadAudioComponent->Sound = catapultSettings.reloadSound;
 }
 
 // Called every frame
@@ -49,6 +60,8 @@ void ACatapult_Base::ShotCatapult()
 
 	if (catapultSettings.bIsCanTurn)
 		GetDirectionTurn();
+	
+	reloadAudioComponent->Play();
 }
 
 void ACatapult_Base::ReloadCatapult()
@@ -62,6 +75,9 @@ void ACatapult_Base::ReloadCatapult()
 	// grab projectile to arm bone
 	physicsHandle->GrabComponentAtLocation(projectile->projectileMesh, FName(TEXT("Arm")), positionOfSocket);
 }
+
+void ACatapult_Base::PlaySoundDuringShot()
+{ shotAudioComponent->Play(); }
 
 void ACatapult_Base::RotateCatapult()
 {

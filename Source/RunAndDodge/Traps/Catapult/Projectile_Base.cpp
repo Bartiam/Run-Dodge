@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/SphereComponent.h"
+#include "Components/AudioComponent.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -26,6 +27,10 @@ AProjectile_Base::AProjectile_Base()
 	overlapCollision->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	overlapCollision->SetCollisionResponseToAllChannels(ECR_Overlap);
 	overlapCollision->SetupAttachment(RootComponent);
+
+	// Create audio component
+	gotSoundComponent = CreateDefaultSubobject<UAudioComponent>(FName(TEXT("Got component")));
+	gotSoundComponent->SetupAttachment(RootComponent);
 
 	Tags.Add(FName(TEXT("Projectile")));
 }
@@ -68,4 +73,6 @@ void AProjectile_Base::HandleBeginOverlap(UPrimitiveComponent* hitComponent, AAc
 		if (damage <= 0.f)
 			damage = 0.f;
 	}
+
+	gotSoundComponent->Play();
 }
