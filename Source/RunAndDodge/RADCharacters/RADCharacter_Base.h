@@ -49,7 +49,6 @@ private: // Private variables
 	UFUNCTION()
 	void UpdateMovementSpeed();
 
-
 public: // Getters and setters
 
 	// Getter for health component
@@ -64,6 +63,10 @@ public: // Getters and setters
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool GetIsCharacterDied() const;
 
+	// Getter for character crouched
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool GetIsCharacterCrouched() const;
+
 public: // Public variables
 
 	// Character movement speed
@@ -71,6 +74,7 @@ public: // Public variables
 	FCharacterSpeed characterSpeed;
 
 	// Flags for change movement state
+	UPROPERTY(BlueprintReadWrite)
 	bool bIsCharacterSprint = false;
 	bool bIsCharacterWalk = false;
 	bool bIsCharacterTired = false;
