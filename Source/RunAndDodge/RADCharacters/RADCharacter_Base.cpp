@@ -113,6 +113,9 @@ const UStaminaComponent_Base* ARADCharacter_Base::GetStaminaComponent() const
 	return staminaComponent;
 }
 
+bool ARADCharacter_Base::GetIsCharacterDied() const
+{ return bIsCharacterDied; }
+
 void ARADCharacter_Base::UpdateMovementState()
 {
 	if (bIsCharacterSprint && GetCharacterMovement()->IsCrouching())

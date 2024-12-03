@@ -60,6 +60,10 @@ public: // Getters and setters
 	UFUNCTION()
 	const UStaminaComponent_Base* GetStaminaComponent() const;
 
+	// Getter for character died
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool GetIsCharacterDied() const;
+
 public: // Public variables
 
 	// Character movement speed
