@@ -146,7 +146,7 @@ void ARADCharacter_Base::CharacterJumping()
 {
 	if (!GetCharacterMovement()->IsFalling() && 
 		staminaComponent->GetCurrentStamina() > staminaComponent->staminaSpentOnJump &&
-		!bIsCharacterCrouched)
+		!bIsCharacterCrouched && GetCharacterMovement()->CrouchedHalfHeight > 40.f)
 	{
 		Jump();
 		bIsCharacterJump = true;
