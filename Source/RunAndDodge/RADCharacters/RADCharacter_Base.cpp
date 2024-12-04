@@ -182,6 +182,7 @@ void ARADCharacter_Base::CharacterCrouch()
 void ARADCharacter_Base::CharacterUnCrouch()
 {
 	bIsCharacterCrouched = false;
+	GetCharacterMovement()->CrouchedHalfHeight = 88.f;
 	UnCrouch();
 	UpdateMovementState();
 }
