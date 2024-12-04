@@ -17,7 +17,7 @@ class RUNANDDODGE_API URADGameInstance_Base : public UGameInstance
 	GENERATED_BODY()
 
 private: // Private virables
-
+	
 	FString profileName = FString(TEXT("MainProfile"));
 	int indexLevel = 0;
 
@@ -25,8 +25,8 @@ private: // Private virables
 	float currentSensitivity = 100.f;
 	TArray<int> levelBestTimes = { 0 };
 	bool bIsLearningEnabled = true;
-	float musicVolume = 1.f;
-	float soundsVolume = 1.f;
+	float musicVolume = 0.5f;
+	float soundsVolume = 0.5f;
 	// =================================== //
 
 	TArray<FString> levelNames = { FString(TEXT("Вход в замок")) };
